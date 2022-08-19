@@ -1,4 +1,4 @@
-## Aplicación para gestion de inventario
+## Aplicación para Gestión de Inventario
 #### Técnologias utilizadas
 React with ViteJs, Tailwind CSS, Redux
 
