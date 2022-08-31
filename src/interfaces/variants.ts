@@ -1,1 +1,1 @@
-export type variants = "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark";
+export type variants = "primary" | "secondary" | "accent" | "neutral" | "base-100" | "info" | "success" | "warning" | "error";
