@@ -1,8 +1,14 @@
+import { BrowserRouter } from "react-router-dom";
+import { Navbar } from "./components/Navbar/Navbar";
+import Sidebar from "./components/SideBar/Sidebar";
+
 const App = () => {
     return (
-        <h1 className="text-4xl font-bold">
-            Hello world! 🌍
-        </h1>
+        <BrowserRouter>
+            <Navbar />
+            <Sidebar />
+        </BrowserRouter>
+
     )
 }
 export default App

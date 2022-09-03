@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { SidebarData } from "./SidebarData"
 
 const Sidebar = () => {
@@ -7,9 +7,9 @@ const Sidebar = () => {
 
     return (
         <div className="flex">
-            <div className={`bg-neutral h-screen p-5 pt-8 ${open ? "w-72" : "w-20"} duration-500 relative`}>
+            <div className={`bg-neutral h-screen z-20 p-5 pt-8 ${open ? "w-72" : "w-20"} duration-500 relative`}>
                 <button
-                    className={`bg-white text-base-100 text-3xl rounded-full absolute -right-3 top-9 ${!open && "rotate-180"}`}
+                    className={`bg-white text-base-100 text-3xl rounded-full absolute -right-3 top-12 ${!open && "rotate-180"}`}
                     onClick={() => setOpen(!open)}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16">
@@ -37,13 +37,21 @@ const Sidebar = () => {
                                 </p>
 
                                 {
-                                    item.submenu.map((subitem, subindex) => (
+                                    item.submenu?.map((subitem, subindex) => (
                                         <NavLink
                                             key={subindex}
                                             to={subitem.url}
                                             className={({ isActive }) => isActive ? "text-gray-300 text-sm flex items-center cursor-pointer p-2 mt-2 bg-secondary rounded-md" : "text-gray-300 text-sm flex items-center cursor-pointer p-2 mt-2 hover:bg-secondary rounded-md"}
                                         >
-                                            {subitem.icon ? subitem.icon : null}
+                                            {
+                                                open ? (
+                                                    subitem.icon
+                                                ) : (
+                                                    <div className="tooltip tooltip-right" data-tip={subitem.name}>
+                                                        {subitem.icon}
+                                                    </div>
+                                                )
+                                            }
                                             <span className={`text-sm ml-2 ${!open && "hidden"}`}>
                                                 {subitem.name}
                                             </span>
@@ -57,7 +65,7 @@ const Sidebar = () => {
             </div>
 
             <div className={`${open ? "mx-28" : "mx-28"} pt-8 duration-500`}>
-                <h1>Home</h1>
+                <Outlet />
             </div>
         </div>
     )
