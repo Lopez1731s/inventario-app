@@ -1,14 +1,27 @@
-import { BrowserRouter } from "react-router-dom";
-import { Navbar } from "./components/Navbar/Navbar";
-import Sidebar from "./components/SideBar/Sidebar";
+//react router imports
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RoutesLoading } from "./components/Loaders";
+import { NotFound } from "./components/NotFound";
+
+//Components imports
+const Sidebar = lazy(() => import("./components/SideBar/Sidebar"));
+const Login = lazy(() => import("./pages/LoginPage/LoginPage"));
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <Navbar />
-            <Sidebar />
-        </BrowserRouter>
+        <Suspense fallback={<RoutesLoading />}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Sidebar />}>
+                        {/* Other routes goes here */}
+                        <Route path="*" element={<NotFound />} />
+                    </Route>
 
+                    <Route path="/login" element={<Login />} />
+                </Routes>
+            </BrowserRouter>
+        </Suspense>
     )
 }
 export default App

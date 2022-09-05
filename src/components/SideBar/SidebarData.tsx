@@ -44,7 +44,7 @@ export const SidebarData = [
         submenu: [
             {
                 name: 'Inicio',
-                url: '/',
+                url: '/dashboard',
                 icon: homeIcon,
             }
         ]

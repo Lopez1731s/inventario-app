@@ -2,16 +2,9 @@ export const Navbar = () => {
     return (
         <nav className="bg-neutral absolute z-10 h-16 w-full">
             <div className="flex justify-end">
-                <div className="py-4 pr-4">
-                    <span className="text-lg">
-                        E-Warden
-                    </span>
-                </div>
-
-
                 <div className="dropdown dropdown-end">
-                    <div className="avatar py-2 pr-12">
-                        <div tabIndex={0} className="w-12 rounded-full">
+                    <div className="avatar py-3 pr-12 cursor-pointer tooltip tooltip-left tooltip-primary" data-tip="Cuenta">
+                        <div tabIndex={0} className="w-10 rounded-full">
                             <img src="https://placeimg.com/192/192/people" />
                         </div>
                     </div>
