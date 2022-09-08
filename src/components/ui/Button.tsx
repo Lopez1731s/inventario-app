@@ -1,13 +1,14 @@
 import { FC } from "react";
-import { variants } from "../../interfaces";
+import { Sizes, variants } from "../../interfaces";
 
 interface ButtonProps {
     name: string;
-    variant: variants
+    variant: variants;
+    size: Sizes;
 }
 
-export const Button: FC<ButtonProps> = ({ name, variant }) => {
+export const Button: FC<ButtonProps> = ({ name, variant, size }) => {
     return (
-        <button className={`btn btn-${variant}`}>{name}</button>
+        <button className={`btn btn-${variant} btn-${size}`}>{name}</button>
     )
 }

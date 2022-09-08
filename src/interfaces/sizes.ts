@@ -1,0 +1,1 @@
+export type Sizes = "lg" | "sm" | "xs"

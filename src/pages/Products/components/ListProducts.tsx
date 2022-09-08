@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import { ErrorLoading, RoutesLoading } from "../../../components/Loaders"
-import { LinkButton, LinkButtonActions, Pagination } from "../../../components/ui"
+import { Button, LinkButton, LinkButtonActions, Pagination } from "../../../components/ui"
 import { useGetProductsQuery } from "../../../features/products/productSlice"
 import { Products } from "../../../interfaces";
 
 const ListProducts = () => {
     const { data: productos, isLoading, isError, error } = useGetProductsQuery(undefined);
-    console.log(productos);
 
     if (isLoading) return <RoutesLoading />
 
@@ -23,18 +22,34 @@ const ListProducts = () => {
                     </div>
                 </div>
 
+                <div className="flex justify-between mb-3">
+                    <div className="flex">
+                        <Button name="Filtros" variant="ghost" size="xs" />
+                        <button className="btn btn-ghost btn-xs">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div>
+                        <div className="form-control">
+                            <input type="text" placeholder="Buscar" className="input input-bordered" />
+                        </div>
+                    </div>
+                </div>
+
                 <div className="overflow-x-auto w-full h-full">
                     <table className="table w-full">
                         <thead>
                             <tr>
-                                <th className="bg-neutral">ID</th>
-                                <th className="bg-neutral">Nombre</th>
-                                <th className="bg-neutral">SLUG</th>
-                                <th className="bg-neutral">Estado</th>
-                                <th className="bg-neutral">Precio tienda</th>
-                                <th className="bg-neutral">Precio venta</th>
-                                <th className="bg-neutral">Fecha de creación</th>
-                                <th className="bg-neutral">Acciones</th>
+                                <th className="bg-secondary">ID</th>
+                                <th className="bg-secondary">Nombre</th>
+                                <th className="bg-secondary">SLUG</th>
+                                <th className="bg-secondary">Estado</th>
+                                <th className="bg-secondary">Precio tienda</th>
+                                <th className="bg-secondary">Precio venta</th>
+                                <th className="bg-secondary">Fecha de creación</th>
+                                <th className="bg-secondary">Acciones</th>
                             </tr>
                         </thead>
 
@@ -72,7 +87,7 @@ const ListProducts = () => {
                         </tbody>
                     </table>
                 </div>
-
+                
                 <Pagination />
             </div>
         </div>
