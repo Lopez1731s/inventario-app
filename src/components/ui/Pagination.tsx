@@ -3,11 +3,13 @@ export const Pagination = () => {
         <div className="flex justify-between mt-6">
             <div>
                 <span className="text-sm">Mostrando 1 - 10 de 100</span> <br />
-                {/* <select className="select select-bordered">
-                    <option>10</option>
-                    <option>20</option>
-                    <option>30</option>
-                </select> */}
+                {/*                 
+                    <select className="select select-bordered">
+                        <option>10</option>
+                        <option>20</option>
+                        <option>30</option>
+                    </select>
+                 */}
             </div>
             <div className="btn-group">
                 <button className="btn">«</button>

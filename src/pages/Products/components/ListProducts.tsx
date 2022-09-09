@@ -1,15 +1,12 @@
-import { Link } from "react-router-dom";
-import { ErrorLoading, RoutesLoading } from "../../../components/Loaders"
-import { Button, LinkButton, LinkButtonActions, Pagination } from "../../../components/ui"
-import { useGetProductsQuery } from "../../../features/products/productSlice"
-import { Products } from "../../../interfaces";
+import { LinkButton, LinkButtonActions, Pagination } from "../../../components/ui";
+import { Filters } from "./Filters";
 
 const ListProducts = () => {
-    const { data: productos, isLoading, isError, error } = useGetProductsQuery(undefined);
+    // const { data: productos, isLoading, isError, error } = useGetProductsQuery(undefined);
 
-    if (isLoading) return <RoutesLoading />
+    // if (isLoading) return <RoutesLoading />
 
-    if (isError) return <ErrorLoading />
+    // if (isError) return <ErrorLoading />
 
     return (
         <div className="card w-full bg-base-200 shadow-md rounded-md">
@@ -22,39 +19,25 @@ const ListProducts = () => {
                     </div>
                 </div>
 
-                <div className="flex justify-between mb-3">
-                    <div className="flex">
-                        <Button name="Filtros" variant="ghost" size="xs" />
-                        <button className="btn btn-ghost btn-xs">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div>
-                        <div className="form-control">
-                            <input type="text" placeholder="Buscar" className="input input-bordered" />
-                        </div>
-                    </div>
-                </div>
+                <Filters />
 
                 <div className="overflow-x-auto w-full h-full">
                     <table className="table w-full">
                         <thead>
                             <tr>
-                                <th className="bg-secondary">ID</th>
-                                <th className="bg-secondary">Nombre</th>
-                                <th className="bg-secondary">SLUG</th>
-                                <th className="bg-secondary">Estado</th>
-                                <th className="bg-secondary">Precio tienda</th>
-                                <th className="bg-secondary">Precio venta</th>
-                                <th className="bg-secondary">Fecha de creación</th>
-                                <th className="bg-secondary">Acciones</th>
+                                <th className="bg-primary text-secondary">ID</th>
+                                <th className="bg-primary text-secondary">Nombre</th>
+                                <th className="bg-primary text-secondary">SLUG</th>
+                                <th className="bg-primary text-secondary">Estado</th>
+                                <th className="bg-primary text-secondary">Precio tienda</th>
+                                <th className="bg-primary text-secondary">Precio venta</th>
+                                <th className="bg-primary text-secondary">Fecha de creación</th>
+                                <th className="bg-primary text-secondary">Acciones</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {
+                            {/* {
                                 productos.data.map((producto: Products, index: number) => (
                                     <tr key={index}>
                                         <td>{producto.id}</td>
@@ -83,11 +66,37 @@ const ListProducts = () => {
                                         </td>
                                     </tr>
                                 ))
-                            }
+                            } */}
+
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Producto 1
+                                    <br />
+                                    <span className="text-sm opacity-50">SKU: 123456789</span>
+                                </td>
+
+                                <td>producto-1</td>
+
+                                <td><span className="badge badge-sm mr-2">Disponible</span></td>
+
+                                <td>$ 100.00</td>
+
+                                <td>$ 120.00</td>
+
+                                <td>2021-08-01</td>
+
+                                <td>
+                                    <div className="flex gap-2">
+                                        <LinkButton action={LinkButtonActions.Edit} link={`/products/edit/1`} variant="ghost" />
+                                        <LinkButton action={LinkButtonActions.Details} link={`/products/details/1`} variant="ghost" />
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                
+
                 <Pagination />
             </div>
         </div>

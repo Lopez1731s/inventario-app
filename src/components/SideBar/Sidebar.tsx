@@ -6,12 +6,13 @@ import { SidebarData } from "./SidebarData";
 
 const Sidebar = () => {
     const [open, setOpen] = useState<boolean>(true);
+    const [theme, setTheme] = useState<string>("light");
 
     return (
         // light night
-        <div className="flex" data-theme="light">
-            <Navbar />
-            <div className={`bg-base-200 h-screen z-20 p-5 pt-8 ${open ? "w-72" : "w-20"} duration-500 relative border-r border-accent`}>
+        <div className="flex" data-theme={theme}>
+            <Navbar theme={theme} setTheme={setTheme} />
+            <div className={`bg-base-200 h-screen z-20 p-5 pt-8 ${open ? "w-72" : "w-20"} duration-500 relative border-r border-accent shadow-sm`}>
                 <button
                     className={`bg-secondary text-primary text-3xl rounded-full absolute -right-3 top-12 border ${!open && "rotate-180"}`}
                     onClick={() => setOpen(!open)}
@@ -22,8 +23,8 @@ const Sidebar = () => {
                 </button>
 
                 <div className="inline-flex">
-                    <div className="block float-left mr-4 cursor-pointer text-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width={40} height={40}>
+                    <div className="block float-left mr-4 text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width={40} height={40} fill="currentColor">
                             <rect width="256" height="256" fill="none" />
                             <path d="M79,47.5l49,27.6,49-27.6L131.9,22.2a7.8,7.8,0,0,0-7.8,0Z" opacity="0.2" />
                             <path d="M176,209V153.9l48-27v50.4a8.1,8.1,0,0,1-4.1,7Z" opacity="0.2" />

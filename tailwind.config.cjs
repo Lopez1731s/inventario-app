@@ -21,8 +21,9 @@ module.exports = {
                 night: {
                     ...require("daisyui/src/colors/themes")["[data-theme=night]"],
                     "base-200": "#04293A",
-                    primary: "#F9F9F9",
-                    secondary: "#2c2f33",
+                    primary: "#3ABFF8",
+                    secondary: "#FFFFFF",
+                    accent: "#2A303C",
                 },
             },
         ],

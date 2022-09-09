@@ -4,7 +4,7 @@ import { Sizes, variants } from "../../interfaces";
 interface ButtonProps {
     name: string;
     variant: variants;
-    size: Sizes;
+    size?: Sizes;
 }
 
 export const Button: FC<ButtonProps> = ({ name, variant, size }) => {
