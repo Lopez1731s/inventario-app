@@ -1,4 +1,4 @@
-export interface Products {
+export interface IProducts {
     createdAt: Date;
     descripcion: null;
     disponible: boolean;
@@ -12,7 +12,7 @@ export interface Products {
     slug: string;
 }
 
-export interface ProductoCreate {
+export interface IProductoCreate {
     nombre: string;
     sku: string;
     slug: string;

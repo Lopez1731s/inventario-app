@@ -4,20 +4,20 @@ import { variants } from "../../interfaces";
 interface SelectProps {
     name: string;
     variant: variants;
-    defaultValue: string;
+    defaultOption: string;
     data: any;
     register: any;
     errors: any;
 }
 
-export const Select: FC<SelectProps> = ({ name, variant, defaultValue, data, register, errors }) => {
+export const Select: FC<SelectProps> = ({ name, variant, defaultOption, data, register, errors }) => {
     return (
         <div className="form-control w-full">
             <select
                 className={errors[name] ? "select select-bordered select-error" : `select select-bordered select-${variant}`}
                 {...register(name, { required: "Requeried" })}
             >
-                <option disabled selected value="">{defaultValue}</option>
+                <option value={defaultOption} hidden>{defaultOption}</option>
                 {
                     data.map((item: any) => (
                         <option key={item.id} value={item.id}>{item.name}</option>
@@ -26,7 +26,7 @@ export const Select: FC<SelectProps> = ({ name, variant, defaultValue, data, reg
             </select>
 
             <label className="label">
-                {errors[name] && <span className="label-text-alt">{errors[name].message}</span>}
+                {errors[name] && <span className="label-text-alt text-error">{errors[name].message}</span>}
             </label>
         </div>
     )
