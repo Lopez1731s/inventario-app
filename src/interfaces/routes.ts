@@ -3,6 +3,15 @@ export const PublicRoutes = {
 }
 
 export const PrivateRoutes = {
-    HOME: '/',
-    DASHBOARD: '/dashboard',    
+    PRIVATE: 'app',
+    DASHBOARD: 'dashboard',
+    EMPLEADOS: 'empleados',
+    CARGOS: 'cargos',
+    USUARIOS: 'usuarios',
+    CLIENTES: 'clientes',
+    PROVEEDORES: 'proveedores',
+    PRODUCTOS: 'productos',
+    CATEGORIAS: 'categorias',
+    MARCAS: 'marcas',
+    PEDIDOS: 'pedidos',
 }

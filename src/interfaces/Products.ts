@@ -13,17 +13,17 @@ export interface IProducts {
 }
 
 export interface IProductoCreate {
-    nombre: string;
-    sku: string;
-    slug: string;
-    marca: string;
-    categoria: string;
-    proveedor: number;
+    nombre: string;//
+    sku: string;//
+    slug: string;//
+    marca: string;//
+    categoria: string;//
+    proveedor: number;//
     propiedades: Propiedades;
     imagenes: string[];
-    precioTienda: number;
-    precioVenta: number;
-    descripcion: string;
+    precioTienda: number;//
+    precioVenta: number;//
+    descripcion: string;//
     estado: boolean;
 }
 

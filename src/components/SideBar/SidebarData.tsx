@@ -1,3 +1,5 @@
+import { PrivateRoutes } from "../../interfaces"
+
 const homeIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" viewBox="0 0 16 16">
         <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
@@ -69,7 +71,7 @@ export const SidebarData = [
         submenu: [
             {
                 name: 'Inicio',
-                url: '/dashboard',
+                url: "dashboard",
                 icon: homeIcon,
             }
         ]
@@ -79,27 +81,27 @@ export const SidebarData = [
         submenu: [
             {
                 name: "Empleados",
-                url: "/empleados",
+                url: "empleados",
                 icon: employeeIcon,
             },
             {
                 name: "Cargos",
-                url: "/cargos",
+                url: "cargos",
                 icon: roles,
             },
             {
                 name: "Usuarios",
-                url: "/usuarios",
+                url: "usuarios",
                 icon: users,
             },
             {
                 name: "Clientes",
-                url: "/clientes",
+                url: "clientes",
                 icon: clients,
             },
             {
                 name: "Proveedores",
-                url: "/proveedores",
+                url: "proveedores",
                 icon: proveedores,
             }
         ],
@@ -109,22 +111,22 @@ export const SidebarData = [
         submenu: [
             {
                 name: "Productos",
-                url: "/productos",
+                url: "productos",
                 icon: productIcon
             },
             {
                 name: "Categorías",
-                url: "/categorias",
+                url: "categorias",
                 icon: categoriesIcon
             },
             {
                 name: "Marcas",
-                url: "/marcas",
+                url: "marcas",
                 icon: marks,
             },
             {
                 name: "Pedidos",
-                url: "/pedidos",
+                url: "pedidos",
                 icon: orders,
             }
         ]

@@ -1,4 +1,5 @@
 import { LinkButton, LinkButtonActions, Pagination } from "../../../components/ui";
+import { PrivateRoutes } from "../../../interfaces";
 import { Filters } from "./Filters";
 
 const ListProducts = () => {
@@ -14,8 +15,8 @@ const ListProducts = () => {
                 <div className="flex justify-between mb-3">
                     <h2 className="card-title">Productos</h2>
                     <div>
-                        <LinkButton name="Exportar" action={LinkButtonActions.Export} link="/productos" variant="ghost" />
-                        <LinkButton name="Agregar" action={LinkButtonActions.Add} link="/productos/crear" variant="ghost" />
+                        <LinkButton name="Exportar" action={LinkButtonActions.Export} link="/" variant="ghost" />
+                        <LinkButton name="Agregar" action={LinkButtonActions.Add} link="crear" variant="ghost" />
                     </div>
                 </div>
 

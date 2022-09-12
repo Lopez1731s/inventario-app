@@ -1,22 +1,14 @@
-import { Route, Routes, useRoutes } from "react-router-dom";
-import { ListProducts, NewProduct } from "./components";
+import { Route } from "react-router-dom"
+import { RoutesNotFound } from "../../utilities"
+import { ListProducts, NewProduct } from "./components"
 
 const ProductsPage = () => {
-	let routes = useRoutes([
-		{
-			path: "/",
-			element: <ListProducts />,
-		},
-		{
-			path: "/crear",
-			element: <NewProduct />,
-		},
-		{
-			path: "*",
-			element: <>404</>,
-		},
-	]);
-
-	return routes;
-};
-export default ProductsPage;
+	return (
+		<RoutesNotFound>
+			<Route path="/" element={<ListProducts />} />
+			<Route path="/crear" element={<NewProduct />} />
+			<Route path="/editar/:id" element={<NewProduct />} />
+		</RoutesNotFound>
+	)
+}
+export default ProductsPage

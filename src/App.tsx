@@ -1,28 +1,35 @@
 //react router imports
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { RoutesLoading } from "./components/Loaders";
-import { NotFound } from "./components/NotFound";
-import { ProductsPage } from "./pages";
+import { Provider } from "react-redux";
+import { BrowserRouter, Navigate, Route } from "react-router-dom";
+
+import { store } from "./features/store";
+import { PrivateRoutes, PublicRoutes } from "./interfaces";
 
 //Components imports
-const Sidebar = lazy(() => import("./components/SideBar/Sidebar"));
+import { RoutesLoading } from "./components/Loaders";
+import { Authguard } from "./guards";
+import { Private } from "./pages";
+import { RoutesNotFound } from "./utilities";
+
 const Login = lazy(() => import("./pages/LoginPage/LoginPage"));
 
 const App = () => {
     return (
         <Suspense fallback={<RoutesLoading />}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Sidebar />}>
-                        {/* Other routes goes here */}
-                        <Route path="*" element={<NotFound />} />
-                        <Route path="/productos/*" element={<ProductsPage />} />
-                    </Route>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <RoutesNotFound>
+                        <Route path="/" element={<Navigate to={`${PrivateRoutes.PRIVATE}/dashboard`} />} />
 
-                    <Route path="/login" element={<Login />} />
-                </Routes>
-            </BrowserRouter>
+                        <Route element={<Authguard privateValidation={true} />}>
+                            <Route path={`${PrivateRoutes.PRIVATE}/*`} element={<Private />} />
+                        </Route>
+
+                        <Route path={PublicRoutes.LOGIN} element={<Login />} />
+                    </RoutesNotFound>
+                </BrowserRouter>
+            </Provider>
         </Suspense>
     )
 }
