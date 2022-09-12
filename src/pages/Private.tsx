@@ -20,15 +20,15 @@ const Private = () => {
         <RoutesNotFound>
             <Route element={<Sidebar />}>
                 <Route path={`${PrivateRoutes.DASHBOARD}/*`} element={<DashboardPage />} />
-                <Route path={`${PrivateRoutes.EMPLEADOS}`} element={<EmpleadosPage />} />
-                <Route path={`${PrivateRoutes.CARGOS}`} element={<CargosPage />} />
-                <Route path={`${PrivateRoutes.USUARIOS}`} element={<UsuariosPage />} />
-                <Route path={`${PrivateRoutes.CLIENTES}`} element={<ClientesPage />} />
-                <Route path={`${PrivateRoutes.PROVEEDORES}`} element={<ProveedoresPage />} />
+                <Route path={`${PrivateRoutes.EMPLEADOS}/*`} element={<EmpleadosPage />} />
+                <Route path={`${PrivateRoutes.CARGOS}/*`} element={<CargosPage />} />
+                <Route path={`${PrivateRoutes.USUARIOS}/*`} element={<UsuariosPage />} />
+                <Route path={`${PrivateRoutes.CLIENTES}/*`} element={<ClientesPage />} />
+                <Route path={`${PrivateRoutes.PROVEEDORES}/*`} element={<ProveedoresPage />} />
                 <Route path={`${PrivateRoutes.PRODUCTOS}/*`} element={<ProductsPage />} />
-                <Route path={`${PrivateRoutes.CATEGORIAS}`} element={<CategoriasPage />} />
-                <Route path={`${PrivateRoutes.MARCAS}`} element={<MarcasPage />} />
-                <Route path={`${PrivateRoutes.PEDIDOS}`} element={<PedidosPage />} />
+                <Route path={`${PrivateRoutes.CATEGORIAS}/*`} element={<CategoriasPage />} />
+                <Route path={`${PrivateRoutes.MARCAS}/*`} element={<MarcasPage />} />
+                <Route path={`${PrivateRoutes.PEDIDOS}/*`} element={<PedidosPage />} />
             </Route>
         </RoutesNotFound>
     )
