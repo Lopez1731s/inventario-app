@@ -1,10 +1,11 @@
 import { Route } from "react-router-dom"
 import { RoutesNotFound } from "../../utilities"
+import { ListCargos, NewCargo, UpdateCargo } from "./components"
 
 const CargosPage = () => {
     return (
         <RoutesNotFound>
-            <Route path="/" element={<h1>CargosPage</h1>} />
+            <Route path="/" element={<ListCargos />} />
         </RoutesNotFound>
     )
 }

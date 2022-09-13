@@ -1,13 +1,15 @@
+import { ErrorLoading, RoutesLoading } from "../../../components/Loaders";
 import { LinkButton, LinkButtonActions, Pagination } from "../../../components/ui";
-import { PrivateRoutes } from "../../../interfaces";
+import { useGetProductsQuery } from "../../../features/products/productSlice";
+import { IProducts } from "../../../interfaces";
 import { Filters } from "./Filters";
 
 const ListProducts = () => {
-    // const { data: productos, isLoading, isError, error } = useGetProductsQuery(undefined);
+    const { data: productos, isLoading, isError, error } = useGetProductsQuery(undefined);
 
-    // if (isLoading) return <RoutesLoading />
+    if (isLoading) return <RoutesLoading />
 
-    // if (isError) return <ErrorLoading />
+    if (isError) return <ErrorLoading />
 
     return (
         <div className="card w-full bg-base-200 shadow-md rounded-md">
@@ -38,8 +40,8 @@ const ListProducts = () => {
                         </thead>
 
                         <tbody>
-                            {/* {
-                                productos.data.map((producto: Products, index: number) => (
+                            {
+                                productos.data.map((producto: IProducts, index: number) => (
                                     <tr key={index}>
                                         <td>{producto.id}</td>
 
@@ -61,13 +63,13 @@ const ListProducts = () => {
 
                                         <td>
                                             <div className="flex gap-2">
-                                                <LinkButton action={LinkButtonActions.Edit} link={`/products/edit/${producto.id}`} variant="ghost" />
-                                                <LinkButton action={LinkButtonActions.Details} link={`/products/details/${producto.id}`} variant="ghost" />
+                                                <LinkButton action={LinkButtonActions.Edit} link={`editar/${producto.id}`} variant="ghost" />
+                                                <LinkButton action={LinkButtonActions.Details} link={`detalle/${producto.id}`} variant="ghost" />
                                             </div>
                                         </td>
                                     </tr>
                                 ))
-                            } */}
+                            }
 
                             <tr>
                                 <td>1</td>

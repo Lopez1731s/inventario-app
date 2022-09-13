@@ -9,7 +9,6 @@ const NewProduct = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<IProductoCreate>({
         resolver: yupResolver(ProductSchema)
     });
-    console.log(errors);
 
     const onSubmit: SubmitHandler<IProductoCreate> = (data) => console.log(data);
 

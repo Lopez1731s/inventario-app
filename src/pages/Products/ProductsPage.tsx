@@ -7,7 +7,8 @@ const ProductsPage = () => {
 		<RoutesNotFound>
 			<Route path="/" element={<ListProducts />} />
 			<Route path="/crear" element={<NewProduct />} />
-			<Route path="/editar/:id" element={<NewProduct />} />
+			<Route path="/editar/:id" element={<>Editar</>} />
+			<Route path="detalle/:id" element={<>Detalle</>} />
 		</RoutesNotFound>
 	)
 }

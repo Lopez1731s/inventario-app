@@ -1,42 +1,39 @@
-//features
-import { useGetCategoriasQuery } from "../../../features/categorias/categoriasSlice";
+import { useState } from 'react';
 
-//interfaces
-import { ICategorias } from "../../../interfaces";
+//API slice
+import { useGetCargosQuery } from '../../../features/cargos/cargosSlice';
 
 //components
-import { ErrorLoading, RoutesLoading } from "../../../components/Loaders";
-import { LinkButton, LinkButtonActions, ModalButton, Pagination } from "../../../components/ui";
-import { Filters } from "./Filters";
-import NewCategoria from "./NewCategoria";
-import { useState } from 'react';
-import UpdateCategoria from "./UpdateCategoria";
+import { LinkButton, LinkButtonActions } from '../../../components/ui/LinkButton';
+import { ErrorLoading, RoutesLoading } from '../../../components/Loaders';
+import { Filters } from './Filters';
+import { ModalButton, Pagination } from '../../../components/ui';
+import { ICargos } from '../../../interfaces';
+import NewCargo from './NewCargo';
 
-const ListCategorias = () => {
-
+const ListCargos = () => {
     const [showModal, setShowModal] = useState(false);
 
-    const { data: categorias, isLoading, isError, error } = useGetCategoriasQuery(undefined);
+    const { data: cargos, isLoading, isError, error } = useGetCargosQuery(undefined);
 
     if (isLoading) return <RoutesLoading />
 
     if (isError) return <ErrorLoading />
 
-
     return (
         <div className="card w-full bg-base-200 shadow-md rounded-md">
             <div className="card-body">
                 <div className="flex justify-between mb-3">
-                    <h2 className="card-title">Categorias</h2>
+                    <h2 className="card-title">Cargos</h2>
                     <div>
                         <LinkButton name="Exportar" action={LinkButtonActions.Export} link="/" variant="ghost" />
-                        <ModalButton name="Agregar" action={setShowModal} htmlFor={"new-categoria"} />
+                        <ModalButton name="Agregar" action={setShowModal} htmlFor={"new-cargo"} />
                     </div>
                 </div>
 
                 <div className="grid overflow-hidden grid-cols-2 gap-6">
-                    <div className="box">
-                <Filters />
+                    <div>
+                        <Filters />
                         <div className="overflow-x-auto w-full">
                             <table className="table w-full">
                                 <thead>
@@ -49,14 +46,12 @@ const ListCategorias = () => {
 
                                 <tbody>
                                     {
-                                        categorias?.data.map((categoria: ICategorias, index: number) => (
+                                        cargos.map((cargo: ICargos, index: number) => (
                                             <tr key={index}>
-                                                <td>{categoria.id}</td>
-                                                <td>{categoria.nombre}</td>
+                                                <td>{cargo.id}</td>
+                                                <td>{cargo.nombre}</td>
                                                 <td>
-                                                    <div className="flex gap-2">
-                                                        <LinkButton action={LinkButtonActions.Edit} link={`editar/${categoria.id}`} variant="ghost" />
-                                                    </div>
+                                                    <LinkButton  action={LinkButtonActions.Edit} link="/" variant="ghost" />
                                                 </td>
                                             </tr>
                                         ))
@@ -64,17 +59,14 @@ const ListCategorias = () => {
                                 </tbody>
                             </table>
                         </div>
+
                         <Pagination />
-                    </div>
-                    <div className="box">
-                        <UpdateCategoria />
                     </div>
                 </div>
 
-
-                {showModal && <NewCategoria setShowModal={setShowModal} />}
+                {showModal && <NewCargo setShowModal={setShowModal} />}
             </div>
         </div>
     )
 }
-export default ListCategorias
+export default ListCargos

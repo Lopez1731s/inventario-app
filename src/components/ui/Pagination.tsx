@@ -13,11 +13,7 @@ export const Pagination = () => {
             </div>
             <div className="btn-group">
                 <button className="btn">«</button>
-                <button className="btn">1</button>
-                <button className="btn">2</button>
-                <button className="btn btn-disabled">...</button>
-                <button className="btn">99</button>
-                <button className="btn">100</button>
+                <button className="btn">Página 1</button>
                 <button className="btn">»</button>
             </div>
         </div>
