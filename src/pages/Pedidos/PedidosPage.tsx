@@ -1,10 +1,13 @@
 import { Route } from "react-router-dom"
 import { RoutesNotFound } from "../../utilities"
+import { ListPedido, NewPedido, UpdatePedido } from "./components"
 
 const PedidosPage = () => {
     return (
         <RoutesNotFound>
-            <Route path="/" element={<h1>PedidosPage</h1>} />
+            <Route path="/" element={<ListPedido />} />
+            <Route path="crear" element={<NewPedido />} />
+            <Route path="editar/:id" element={<UpdatePedido />} />
         </RoutesNotFound>
     )
 }

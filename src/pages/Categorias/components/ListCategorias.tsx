@@ -36,7 +36,7 @@ const ListCategorias = () => {
 
                 <div className="grid overflow-hidden grid-cols-2 gap-6">
                     <div className="box">
-                <Filters />
+                        <Filters />
                         <div className="overflow-x-auto w-full">
                             <table className="table w-full">
                                 <thead>
