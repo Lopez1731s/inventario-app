@@ -19,7 +19,7 @@ export interface IProductoCreate {
     marca: string;//
     categoria: string;//
     proveedor: number;//
-    propiedades: Propiedades;
+    propiedades: PropiedadesProducto;
     imagenes: string[];
     precioTienda: number;//
     precioVenta: number;//
@@ -27,5 +27,7 @@ export interface IProductoCreate {
     estado: boolean;
 }
 
-export interface Propiedades {
+export interface PropiedadesProducto {
+    nombre_propiedad: string;
+    valor_propiedad: string;
 }

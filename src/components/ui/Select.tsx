@@ -15,7 +15,7 @@ export const Select: FC<SelectProps> = ({ name, variant, defaultOption, data, re
         <div className="form-control w-full">
             <select
                 className={errors[name] ? "select select-bordered select-error" : `select select-bordered select-${variant}`}
-                {...register(name, { required: "Requeried" })}
+                {...register(name)}
             >
                 <option value={defaultOption} hidden>{defaultOption}</option>
                 {

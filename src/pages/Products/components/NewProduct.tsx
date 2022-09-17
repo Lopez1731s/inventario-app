@@ -1,8 +1,9 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { IProductoCreate } from "../../../interfaces";
 import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IProductoCreate } from "../../../interfaces";
 import { ProductSchema } from "../../../schemas";
-import ProductForm from "./ProductForm";
+import { ProductForm, ProductImages, ProductProperties } from './Forms';
+
 
 const NewProduct = () => {
 
@@ -13,9 +14,15 @@ const NewProduct = () => {
     const onSubmit: SubmitHandler<IProductoCreate> = (data) => console.log(data);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <ProductForm register={register} errors={errors} />
-        </form>
+        <>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <ProductForm register={register} errors={errors} />
+            </form>
+
+            <ProductImages />
+
+            <ProductProperties />
+        </>
     )
 }
 export default NewProduct

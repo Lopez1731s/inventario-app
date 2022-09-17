@@ -13,16 +13,13 @@ interface InputProps {
 
 export const Input: FC<InputProps> = ({ name, variant, type, placeholder, register, errors, help }) => {
     return (
-        <div className="form-control mb-3">
+        <div className="form-control mb-3 w-full">
             <input
                 type={type}
                 placeholder={placeholder}
                 className={errors[name] ? "input input-bordered input-error w-full" : `input input-bordered input-${variant} w-full`}
                 {...register(name)}
             />
-
-
-
 
             <div className="flex justify-between">
                 <div>

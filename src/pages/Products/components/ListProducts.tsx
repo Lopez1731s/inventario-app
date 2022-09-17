@@ -1,11 +1,20 @@
+import { useGetProductsQuery } from "../../../features/products/productSlice";
+
+import { IProducts, RTKresponse } from "../../../interfaces";
+
 import { ErrorLoading, RoutesLoading } from "../../../components/Loaders";
 import { LinkButton, LinkButtonActions, Pagination } from "../../../components/ui";
-import { useGetProductsQuery } from "../../../features/products/productSlice";
-import { IProducts } from "../../../interfaces";
 import { Filters } from "./Filters";
 
+type dataResponse = {
+    data: IProducts[]
+}
+interface ResponseProps extends RTKresponse {
+    data: dataResponse;
+}
+
 const ListProducts = () => {
-    const { data: productos, isLoading, isError, error } = useGetProductsQuery(undefined);
+    const { data: productos, isLoading, isError, error } = useGetProductsQuery<ResponseProps>(undefined);
 
     if (isLoading) return <RoutesLoading />
 

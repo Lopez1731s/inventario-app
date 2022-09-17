@@ -8,13 +8,17 @@ import { LinkButton, LinkButtonActions } from '../../../components/ui/LinkButton
 import { ErrorLoading, RoutesLoading } from '../../../components/Loaders';
 import { Filters } from './Filters';
 import { ModalButton, Pagination } from '../../../components/ui';
-import { ICargos } from '../../../interfaces';
+import { ICargos, RTKresponse } from '../../../interfaces';
 import NewCargo from './NewCargo';
+
+interface ResponseProps extends RTKresponse {
+    data: ICargos[];
+}
 
 const ListCargos = () => {
     const [showModal, setShowModal] = useState(false);
 
-    const { data: cargos, isLoading, isError, error } = useGetCargosQuery(undefined);
+    const { data: cargos, isLoading, isError, error } = useGetCargosQuery<ResponseProps>(undefined);
 
     if (isLoading) return <RoutesLoading />
 
@@ -51,7 +55,7 @@ const ListCargos = () => {
                                                 <td>{cargo.id}</td>
                                                 <td>{cargo.nombre}</td>
                                                 <td>
-                                                    <LinkButton  action={LinkButtonActions.Edit} link="/" variant="ghost" />
+                                                    <LinkButton action={LinkButtonActions.Edit} link="/" variant="ghost" />
                                                 </td>
                                             </tr>
                                         ))
