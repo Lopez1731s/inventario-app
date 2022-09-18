@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { variants } from "../../interfaces";
+import { variants } from "../../types";
 
 interface SelectProps {
     name: string;

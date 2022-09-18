@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { variants } from "../../interfaces";
+import { variants } from "../../types";
 
 interface InputProps {
     name: string;
@@ -13,7 +13,7 @@ interface InputProps {
 
 export const Input: FC<InputProps> = ({ name, variant, type, placeholder, register, errors, help }) => {
     return (
-        <div className="form-control mb-3 w-full">
+        <div className="form-control w-full">
             <input
                 type={type}
                 placeholder={placeholder}

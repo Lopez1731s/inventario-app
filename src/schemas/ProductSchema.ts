@@ -13,6 +13,6 @@ export const ProductSchema = yup.object().shape({
 });
 
 export const ProductPropertiesSchema = yup.object().shape({
-    nombre_propiedad: yup.string().trim().required("El nombre de la propiedad es requerido").min(3, "El nombre de la propiedad debe tener al menos 3 caracteres"),
-    valor_propiedad: yup.string().trim().required("El valor de la propiedad es requerido").min(3, "El valor de la propiedad debe tener al menos 3 caracteres"),
+    nombre_propiedad: yup.string().trim().required("El nombre de la propiedad es requerido"),
+    valor_propiedad: yup.string().trim().required("El valor de la propiedad es requerido"),
 });

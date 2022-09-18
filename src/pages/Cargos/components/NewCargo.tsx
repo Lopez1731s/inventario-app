@@ -17,10 +17,9 @@ const NewCargo: FC<IFormInputs> = ({ setShowModal }) => {
         resolver: yupResolver(CategoriaSchema)
     });
 
-    const [createCargo, { isError, error, isLoading, isSuccess }] = useCreateCargoMutation();
+    const [createCargo, {isError, isLoading}] = useCreateCargoMutation();
 
     const onSubmit: SubmitHandler<ICargosCreate> = (data) => {
-        console.log(data);
         createCargo(data);
         setShowModal(false);
         reset();

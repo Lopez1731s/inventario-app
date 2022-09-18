@@ -22,11 +22,29 @@ const ListProveedores = () => {
                             <tr>
                                 <th className="bg-primary text-secondary">ID</th>
                                 <th className="bg-primary text-secondary">Nombres</th>
+                                <th className="bg-primary text-secondary">Apellidos</th>
+                                <th className="bg-primary text-secondary">Empresa</th>
+                                <th className="bg-primary text-secondary">Teléfono</th>
+                                <th className="bg-primary text-secondary">Correo</th>
+                                <th className="bg-primary text-secondary">Acciones</th>
                             </tr>
                         </thead>
 
                         <tbody>
-
+                            <tr>
+                                <td>1</td>
+                                <td>John Doe</td>
+                                <td>John Doe</td>
+                                <td>Microsoft</td>
+                                <td>123456789</td>
+                                <td>jonhdoe@gmail.com</td>
+                                <td>
+                                    <div className="flex gap-2">
+                                        <LinkButton action={LinkButtonActions.Edit} link={`editar/`} variant="ghost" />
+                                        <LinkButton action={LinkButtonActions.Details} link={`detalle/`} variant="ghost" />
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

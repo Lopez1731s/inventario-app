@@ -4,6 +4,6 @@ export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: retry(fetchBaseQuery({ baseUrl: import.meta.env.VITE_BACKEND_URL }), { maxRetries: 3 }),
     refetchOnReconnect: true,
-    tagTypes: ['Categorias', 'Cargos'],
+    tagTypes: ['Categorias', 'Cargos', 'Proveedores', 'Products'],
     endpoints: builder => ({})
 })

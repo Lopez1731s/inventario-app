@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Sizes, variants } from "../../interfaces";
+import { Sizes, variants } from "../../types";
 
 interface ButtonProps {
     name: string;

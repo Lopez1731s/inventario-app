@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { variants } from "../../interfaces";
+import { variants } from '../../types/variants';
 
 export enum LinkButtonActions {
     Add = "Agregar",
@@ -12,7 +12,7 @@ export enum LinkButtonActions {
 
 interface LinkButtonProps {
     link: string;
-    variant: variants
+    variant: variants;
     action: LinkButtonActions;
     name?: string;
 }
