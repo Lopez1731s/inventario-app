@@ -19,8 +19,20 @@ export const cargosSlice = apiSlice.injectEndpoints({
             invalidatesTags: ["Cargos"],
             extraOptions: { maxRetries: 1 },
         }),
+        deleteCargo: build.mutation({
+            query: (id: number) => ({
+                url: `/cargos/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["Cargos"],
+        }),
     }),
     overrideExisting: false,
 });
 
-export const { useGetCargosQuery, useGetCargoQuery, useCreateCargoMutation } = cargosSlice;
+export const {
+    useGetCargosQuery,
+    useGetCargoQuery,
+    useCreateCargoMutation,
+    useDeleteCargoMutation,
+} = cargosSlice;

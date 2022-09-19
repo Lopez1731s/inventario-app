@@ -4,9 +4,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ICargosCreate } from "../../../interfaces";
 import { CategoriaSchema } from "../../../schemas";
 
-import { Button, Input } from "../../../components/ui"
+import { Button, Input, Notifications } from "../../../components/ui"
 import { useCreateCargoMutation } from "../../../features/cargos/cargosSlice";
 import { FC } from "react";
+import { toast } from 'react-toastify';
 
 interface IFormInputs {
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,12 +18,18 @@ const NewCargo: FC<IFormInputs> = ({ setShowModal }) => {
         resolver: yupResolver(CategoriaSchema)
     });
 
-    const [createCargo, {isError, isLoading}] = useCreateCargoMutation();
+    const [createCargo] = useCreateCargoMutation();
 
-    const onSubmit: SubmitHandler<ICargosCreate> = (data) => {
-        createCargo(data);
-        setShowModal(false);
-        reset();
+    const onSubmit: SubmitHandler<ICargosCreate> = async (data) => {
+        await createCargo(data)
+            .unwrap()
+            .then(() => {
+                toast.success("Cargo creado correctamente");
+                reset();
+            })
+            .catch((error) => {
+                toast.error("Error al crear cargo");
+            });
     }
 
     return (
@@ -31,6 +38,7 @@ const NewCargo: FC<IFormInputs> = ({ setShowModal }) => {
             <label htmlFor="new-cargo" className="modal cursor-pointer">
 
                 <label className="modal-box relative" htmlFor="">
+                    <label htmlFor="new-cargo" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-lg font-bold">Nuevo cargo</h3>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mt-8">
@@ -43,7 +51,6 @@ const NewCargo: FC<IFormInputs> = ({ setShowModal }) => {
                                 errors={errors}
                             />
 
-                            {isError && <p className="text-error text-sm">Error</p>}
                         </div>
                         <div className="mt-4 flex justify-end">
                             <Button name="Guardar" variant="primary" />
@@ -51,6 +58,9 @@ const NewCargo: FC<IFormInputs> = ({ setShowModal }) => {
                     </form>
                 </label>
             </label>
+
+            <Notifications />
+
         </>
     )
 }

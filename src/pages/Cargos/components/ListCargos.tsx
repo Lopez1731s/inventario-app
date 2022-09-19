@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 //API slice
-import { useGetCargosQuery } from '../../../features/cargos/cargosSlice';
+import { useDeleteCargoMutation, useGetCargosQuery } from '../../../features/cargos/cargosSlice';
+
+import { ICargos, RTKresponse } from '../../../interfaces';
 
 //components
-import { LinkButton, LinkButtonActions } from '../../../components/ui/LinkButton';
 import { ErrorLoading, RoutesLoading } from '../../../components/Loaders';
+import { ActionButton, ModalButton, Notifications, Pagination } from '../../../components/ui';
+import { LinkButton, LinkButtonActions } from '../../../components/ui/LinkButton';
 import { Filters } from './Filters';
-import { ModalButton, Pagination } from '../../../components/ui';
-import { ICargos, RTKresponse } from '../../../interfaces';
 import NewCargo from './NewCargo';
 
 interface ResponseProps extends RTKresponse {
@@ -18,11 +20,25 @@ interface ResponseProps extends RTKresponse {
 const ListCargos = () => {
     const [showModal, setShowModal] = useState(false);
 
-    const { data: cargos, isLoading, isError, error } = useGetCargosQuery<ResponseProps>(undefined);
+    const { data: cargos, isLoading, isError } = useGetCargosQuery<ResponseProps>(undefined);
+    const [deleteCargo] = useDeleteCargoMutation();
 
     if (isLoading) return <RoutesLoading />
 
     if (isError) return <ErrorLoading />
+
+    const handleDelete = (id: number) => {
+        deleteCargo(id)
+            .unwrap()
+            .then(() => {
+                toast.success("Eliminado correctamente");
+            })
+            .catch((error) => {
+                toast.error("Error al eliminar cargo");
+            });
+    }
+
+    console.log(cargos);
 
     return (
         <div className="card w-full bg-base-200 shadow-md rounded-md">
@@ -50,15 +66,20 @@ const ListCargos = () => {
 
                                 <tbody>
                                     {
-                                        cargos.map((cargo: ICargos, index: number) => (
+                                        cargos.length > 0 ? cargos.map((cargo: ICargos, index: number) => (
                                             <tr key={index}>
                                                 <td>{cargo.id}</td>
                                                 <td>{cargo.nombre}</td>
                                                 <td>
                                                     <LinkButton action={LinkButtonActions.Edit} link="/" variant="ghost" />
+                                                    <ActionButton handleDeleteFunction={() => handleDelete(cargo.id)} id={cargo.id} />
                                                 </td>
                                             </tr>
-                                        ))
+                                        )) : (
+                                            <tr>
+                                                <td colSpan={3} className="text-center">No hay datos registrados</td>
+                                            </tr>
+                                        )
                                     }
                                 </tbody>
                             </table>
@@ -70,6 +91,8 @@ const ListCargos = () => {
 
                 {showModal && <NewCargo setShowModal={setShowModal} />}
             </div>
+
+            <Notifications />
         </div>
     )
 }

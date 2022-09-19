@@ -17,7 +17,7 @@ const NewProveedor = () => {
         resolver: yupResolver(ProveedorSchema)
     });
 
-    const [createProveedor, { isError, error }] = useCreateProveedorMutation();
+    const [createProveedor] = useCreateProveedorMutation();
 
     const onSubmit: SubmitHandler<IProveedorCreate> = async (data) => {
         await createProveedor(data)
