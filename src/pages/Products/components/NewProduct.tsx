@@ -1,28 +1,17 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { SubmitHandler, useForm } from "react-hook-form";
-import { IProductoCreate } from "../../../interfaces";
-import { ProductSchema } from "../../../schemas";
-import { ProductForm, ProductImages, ProductProperties } from './Forms';
+import { Route } from 'react-router-dom';
 
+import RoutesNotFound from '../../../utilities/RoutesNotFound';
+import AddInfoProducto from './AddInfoProducto';
+import { ProductImages, ProductProperties } from './Forms';
 
 const NewProduct = () => {
-
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<IProductoCreate>({
-        resolver: yupResolver(ProductSchema)
-    });
-
-    const onSubmit: SubmitHandler<IProductoCreate> = (data) => console.log(data);
-
     return (
-        <>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <ProductForm register={register} errors={errors} />
-            </form>
-
-            <ProductImages />
-
-            <ProductProperties />
-        </>
+        <RoutesNotFound>
+            {/* <Route path="/" element={<Navigate to="step1" />} /> */}
+            <Route path="step1" element={<AddInfoProducto />} />
+            <Route path="step2" element={<ProductImages />} />
+            <Route path="step3" element={<ProductProperties />} />
+        </RoutesNotFound>
     )
 }
 export default NewProduct

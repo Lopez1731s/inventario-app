@@ -1,8 +1,12 @@
 import { createContext } from "react";
 import { PropiedadesProducto } from "../../../interfaces";
 import { ImageArray } from '../interfaces';
+import { IProductoCreate } from '../../../interfaces/Products';
 
 export interface Image {
+    handleAddProducto: (producto: IProductoCreate) => void;
+    saveProducto: () => void;
+
     imageArray: ImageArray[];
     handleAddImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleDeleteImage: (index: number) => void;

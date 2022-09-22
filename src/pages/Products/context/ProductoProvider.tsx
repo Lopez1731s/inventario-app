@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
-import { PropiedadesProducto } from "../../../interfaces";
+import { useCreateProductMutation } from "../../../features/products/productSlice";
+import { IProductoCreate, PropiedadesProducto } from "../../../interfaces";
 import { ImageArray } from "../interfaces";
 import { ProductoContext } from "./ProductoContext";
 
@@ -8,8 +9,15 @@ interface Props {
 }
 
 const ProductoProvider: FC<Props> = ({ children }) => {
+    const [createProduct] = useCreateProductMutation();
+
+    const [producto, setProducto] = useState<IProductoCreate>({} as IProductoCreate);
     const [imageArray, setImageArray] = useState<ImageArray[]>([]);
     const [productProperties, setProductProperties] = useState<PropiedadesProducto[]>([]);
+
+    const handleAddProducto = (data: IProductoCreate) => {
+        setProducto(data);
+    }
 
     const handleAddImage = (e: any) => {
         const file = e.target.files[0];
@@ -33,14 +41,31 @@ const ProductoProvider: FC<Props> = ({ children }) => {
         setProductProperties(newArray);
     }
 
+    const saveProducto = () => {
+        const data = {
+            ...producto,
+            images: imageArray,
+            properties: productProperties
+        }
+
+        createProduct(data)
+            .unwrap()
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+    }
+
+
+
     return (
         <ProductoContext.Provider value={{
+            handleAddProducto,
             imageArray,
             handleAddImage,
             handleDeleteImage,
             productProperties,
             handleAddProductProperties,
-            handleDeleteProductProperties
+            handleDeleteProductProperties,
+            saveProducto,
         }}>
             {children}
         </ProductoContext.Provider>

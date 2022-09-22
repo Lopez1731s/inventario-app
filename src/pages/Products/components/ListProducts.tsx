@@ -7,14 +7,14 @@ import { LinkButton, LinkButtonActions, Pagination } from "../../../components/u
 import { Filters } from "./Filters";
 
 type dataResponse = {
-    data: IProducts[]
+    data: IProducts[];
 }
 interface ResponseProps extends RTKresponse {
     data: dataResponse;
 }
 
 const ListProducts = () => {
-    const { data: productos, isLoading, isError, error } = useGetProductsQuery<ResponseProps>(undefined);
+    const { data: productos, isLoading, isError } = useGetProductsQuery<ResponseProps>(undefined);
 
     if (isLoading) return <RoutesLoading />
 
@@ -27,7 +27,7 @@ const ListProducts = () => {
                     <h2 className="card-title">Productos</h2>
                     <div>
                         <LinkButton name="Exportar" action={LinkButtonActions.Export} link="/" variant="ghost" />
-                        <LinkButton name="Agregar" action={LinkButtonActions.Add} link="crear" variant="ghost" />
+                        <LinkButton name="Agregar" action={LinkButtonActions.Add} link="crear/step1" variant="ghost" />
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@ const ListProducts = () => {
 
                         <tbody>
                             {
-                                productos.data.map((producto: IProducts, index: number) => (
+                                productos.data.length > 0 ? productos.data.map((producto: IProducts, index: number) => (
                                     <tr key={index}>
                                         <td>{producto.id}</td>
 
@@ -77,34 +77,9 @@ const ListProducts = () => {
                                             </div>
                                         </td>
                                     </tr>
-                                ))
+                                )) : (<tr><td colSpan={8} className="text-center">No hay productos</td></tr>)
                             }
 
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    Producto 1
-                                    <br />
-                                    <span className="text-sm opacity-50">SKU: 123456789</span>
-                                </td>
-
-                                <td>producto-1</td>
-
-                                <td><span className="badge badge-sm mr-2">Disponible</span></td>
-
-                                <td>$ 100.00</td>
-
-                                <td>$ 120.00</td>
-
-                                <td>2021-08-01</td>
-
-                                <td>
-                                    <div className="flex gap-2">
-                                        <LinkButton action={LinkButtonActions.Edit} link={`/products/edit/1`} variant="ghost" />
-                                        <LinkButton action={LinkButtonActions.Details} link={`/products/details/1`} variant="ghost" />
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>

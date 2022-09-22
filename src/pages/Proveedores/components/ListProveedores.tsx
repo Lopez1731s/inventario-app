@@ -1,7 +1,19 @@
-import { LinkButton, LinkButtonActions, Pagination } from "../../../components/ui"
-import { Filters } from "./Filters"
+import { useGetProveedoresQuery } from "../../../features/proveedores/proveedoresSlice";
+
+import { IProveedor } from '../../../interfaces/Proveedor';
+
+import { ErrorLoading, RoutesLoading } from "../../../components/Loaders";
+import { LinkButton, LinkButtonActions, Pagination } from "../../../components/ui";
+import { Filters } from "./Filters";
 
 const ListProveedores = () => {
+
+    const { data: proveedores, isLoading, isError } = useGetProveedoresQuery(undefined);
+
+    if (isLoading) return <RoutesLoading />
+
+    if (isError) return <ErrorLoading />
+
     return (
         <div className="card w-full bg-base-200 shadow-md rounded-md">
             <div className="card-body">
@@ -31,20 +43,24 @@ const ListProveedores = () => {
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>John Doe</td>
-                                <td>Microsoft</td>
-                                <td>123456789</td>
-                                <td>jonhdoe@gmail.com</td>
-                                <td>
-                                    <div className="flex gap-2">
-                                        <LinkButton action={LinkButtonActions.Edit} link={`editar/`} variant="ghost" />
-                                        <LinkButton action={LinkButtonActions.Details} link={`detalle/`} variant="ghost" />
-                                    </div>
-                                </td>
-                            </tr>
+                            {
+                                proveedores.data.length > 0 ? proveedores.data.map((proveedor: IProveedor, index: number) => (
+                                    <tr key={index}>
+                                        <td>{proveedor.id}</td>
+                                        <td>{proveedor.primerNombre} {proveedor.segundoNombre}</td>
+                                        <td>{proveedor.primerApellido} {proveedor.segundoApellido}</td>
+                                        <td>{proveedor.empresa}</td>
+                                        <td>{proveedor.telefono}</td>
+                                        <td>{proveedor.correo}</td>
+                                        <td>
+                                            <div className="flex gap-2">
+                                                <LinkButton action={LinkButtonActions.Edit} link={`editar/`} variant="ghost" />
+                                                <LinkButton action={LinkButtonActions.Details} link={`detalle/`} variant="ghost" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )) : <tr><td colSpan={7} className="text-center">No hay proveedores registrados</td></tr>
+                            }
                         </tbody>
                     </table>
                 </div>

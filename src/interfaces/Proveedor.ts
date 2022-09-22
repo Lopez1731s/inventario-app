@@ -1,4 +1,13 @@
-export interface IProveedor { }
+export interface IProveedor {
+    id: number;
+    primerNombre: string;
+    segundoNombre: string;
+    primerApellido: string;
+    segundoApellido: string;
+    empresa: string;
+    telefono: number;
+    correo: string;
+}
 
 export interface IProveedorCreate {
     primerNombre: string;

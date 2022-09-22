@@ -1,12 +1,46 @@
 import { FC } from 'react';
-import { Input, Select, TextArea } from "../../../../components/ui";
+import { Button, Input, Select, TextArea } from "../../../../components/ui";
+import { useGetCategoriasQuery } from '../../../../features/categorias/categoriasSlice';
+import { useGetMarcasQuery } from '../../../../features/marcas/marcaSlice';
+import { useGetProveedoresQuery } from '../../../../features/proveedores/proveedoresSlice';
+import { IMarca, IProveedor, RTKresponse } from '../../../../interfaces';
+import { ICategorias } from '../../../../interfaces/Categorias';
 
 interface IProductForm {
     register: any;
     errors: any;
 }
 
+type proveedorResponse = {
+    data: IProveedor[];
+}
+
+type categoriaResponse = {
+    data: ICategorias[];
+}
+
+type marcaResponse = {
+    data: IMarca[];
+}
+
+interface Proveedor extends RTKresponse {
+    data: proveedorResponse;
+}
+
+interface Categoria extends RTKresponse {
+    data: categoriaResponse;
+}
+
+interface Marca extends RTKresponse {
+    data: marcaResponse;
+}
+
 const ProductForm: FC<IProductForm> = ({ register, errors }) => {
+    console.log(errors);
+
+    const { data: Proveedores } = useGetProveedoresQuery<Proveedor>(undefined);
+    const { data: Categorias } = useGetCategoriasQuery<Categoria>(undefined);
+    const { data: Marcas } = useGetMarcasQuery<Marca>(undefined);
 
     return (
         <div className="card w-full bg-base-200 shadow-md rounded-md">
@@ -82,13 +116,65 @@ const ProductForm: FC<IProductForm> = ({ register, errors }) => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-4">
-                        <Select name="proveedor" variant="primary" defaultOption="Seleccione un Proveedor" data={[]} register={register} errors={errors} />
-                        <Select name="categoria" variant="primary" defaultOption="Seleccione una categoria" data={[]} register={register} errors={errors} />
-                        <Select name="marca" variant="primary" defaultOption="Seleccione una marca" data={[]} register={register} errors={errors} />
+                    <div className="grid grid-cols-3 gap-4 mb-3">
+                        <div className="form-control w-full">
+                            <select
+                                className={errors.proveedor ? "select select-bordered select-error" : "select select-bordered"}
+                                {...register("proveedor")}
+                            >
+                                <option hidden>Seleccione un proveedor</option>
+                                {
+                                    Proveedores?.data.map((proveedor: IProveedor) => (
+                                        <option key={proveedor.id} value={proveedor.id}>{proveedor.primerNombre}</option>
+                                    ))
+                                }
+                            </select>
+
+                            <label className="label">
+                                {errors.proveedor && <span className="label-text-alt text-error">{errors.proveedor.message}</span>}
+                            </label>
+                        </div>
+
+                        <div className="form-control w-full">
+                            <select
+                                className={errors.proveedor ? "select select-bordered select-error" : "select select-bordered"}
+                                {...register("categoria")}
+                            >
+                                <option hidden value="">Seleccione una categoría</option>
+                                {
+                                    Categorias?.data.map((categoria: ICategorias) => (
+                                        <option key={categoria.id} value={categoria.nombre}>{categoria.nombre}</option>
+                                    ))
+                                }
+                            </select>
+
+                            <label className="label">
+                                {errors.categoria && <span className="label-text-alt text-error">{errors.categoria.message}</span>}
+                            </label>
+                        </div>
+
+                        <div className="form-control w-full">
+                            <select
+                                className={errors.proveedor ? "select select-bordered select-error" : "select select-bordered"}
+                                {...register("marca")}
+                            >
+                                <option hidden value="">Seleccione una marca</option>
+                                {
+                                    Marcas?.data.map((marca: IMarca) => (
+                                        <option key={marca.id} value={marca.nombre}>{marca.nombre}</option>
+                                    ))
+                                }
+                            </select>
+
+                            <label className="label">
+                                {errors.marca && <span className="label-text-alt text-error">{errors.marca.message}</span>}
+                            </label>
+                        </div>
                     </div>
 
-                    {/* <Button name="Guardar" variant="base-100" /> */}
+                    <div className="flex justify-end">
+                        <Button name="Guardar" variant="primary" />
+                    </div>
                 </div>
             </div>
         </div>

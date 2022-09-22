@@ -1,22 +1,28 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button, Input } from '../../../../components/ui';
+import { Button, Input, LinkButton, LinkButtonActions } from '../../../../components/ui';
 import { PropiedadesProducto } from '../../../../interfaces';
 import { ProductPropertiesSchema } from '../../../../schemas';
 import { useContext } from 'react';
 import { ProductoContext } from '../../context';
 import DeletePropertyButtom from '../ui/DeletePropertyButtom';
+import { Link } from 'react-router-dom';
 
 
 const ProductProperties = () => {
 
-    const { productProperties, handleAddProductProperties } = useContext(ProductoContext);
+    const { productProperties, handleAddProductProperties, saveProducto } = useContext(ProductoContext);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<PropiedadesProducto>({
         resolver: yupResolver(ProductPropertiesSchema)
     });
 
     const onSubmit: SubmitHandler<PropiedadesProducto> = (data) => { handleAddProductProperties(data); reset() };
+
+    const sentData = () => {
+        saveProducto();
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="card w-full bg-base-200 shadow-md rounded-md mt-9 mb-9">
@@ -82,6 +88,11 @@ const ProductProperties = () => {
                                 }
                             </tbody>
                         </table>
+                    </div>
+
+                    <div className="flex justify-between mt-3">
+                        <Link to="/app/productos/crear/step2" className="btn btn-primary">Atras</Link>
+                        <button onClick={sentData} className="btn btn-primary">Guardar</button>
                     </div>
                 </div>
             </div>

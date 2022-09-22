@@ -1,12 +1,19 @@
-import { AddImageButtom, DeleteImageButtom } from '../ui';
 import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Notifications } from '../../../../components/ui';
 import { ProductoContext } from '../../context';
+import { AddImageButtom, DeleteImageButtom } from '../ui';
+import { toast } from 'react-toastify';
 
 const ProductImages = () => {
     const { imageArray } = useContext(ProductoContext);
-    
+    const navigate = useNavigate();
+
+    const nextStep = () => imageArray.length > 0 ? navigate("/app/productos/crear/step3") : toast.error("Debes agregar al menos una imagen");
+
     return (
         <div className="card w-full bg-base-200 shadow-md rounded-md mt-9 mb-9">
+            <Notifications />
             <div className="card-body">
                 <div className="flex justify-between">
                     <div>
@@ -51,6 +58,11 @@ const ProductImages = () => {
                             }
                         </tbody>
                     </table>
+                </div>
+
+                <div className="flex justify-between mt-3">
+                    <Link to="/app/productos/crear/step1" className="btn btn-primary">Atras</Link>
+                    <button className="btn btn-primary" onClick={nextStep}>Siguiente</button>
                 </div>
             </div>
         </div>

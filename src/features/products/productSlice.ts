@@ -1,4 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
+import { IProductoCreate } from '../../interfaces/Products';
 
 export const productSlice = apiSlice.injectEndpoints({
     endpoints: (build) => ({
@@ -6,8 +7,16 @@ export const productSlice = apiSlice.injectEndpoints({
             query: () => "/productos",
             providesTags: ["Products"],
         }),
+        createProduct: build.mutation({
+            query: (Product: IProductoCreate) => ({
+                url: "/productos",
+                method: "POST",
+                body: Product,
+            }),
+            invalidatesTags: ["Products"],
+        }),
     }),
     overrideExisting: false,
 });
 
-export const { useGetProductsQuery } = productSlice;
+export const { useGetProductsQuery, useCreateProductMutation } = productSlice;

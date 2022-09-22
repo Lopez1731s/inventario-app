@@ -72,7 +72,7 @@ const ListCargos = () => {
                                                 <td>{cargo.nombre}</td>
                                                 <td>
                                                     <LinkButton action={LinkButtonActions.Edit} link="/" variant="ghost" />
-                                                    <ActionButton handleDeleteFunction={() => handleDelete(cargo.id)} id={cargo.id} />
+                                                    <ActionButton handleFunction={() => handleDelete(cargo.id)} id={cargo.id} />
                                                 </td>
                                             </tr>
                                         )) : (

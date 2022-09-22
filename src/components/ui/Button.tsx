@@ -5,10 +5,11 @@ interface ButtonProps {
     name: string;
     variant: variants;
     size?: Sizes;
+    width?: string;
 }
 
-export const Button: FC<ButtonProps> = ({ name, variant, size }) => {
+export const Button: FC<ButtonProps> = ({ name, variant, size, width }) => {
     return (
-        <button className={`btn btn-${variant} btn-${size}`}>{name}</button>
+        <button className={`btn btn-${variant} ${size ? "btn-" + size : ""} ${width ? width : ""}`} >{name}</button>
     )
 }

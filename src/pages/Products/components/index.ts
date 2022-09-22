@@ -1,3 +1,4 @@
+export { default as AddInfoProducto } from './AddInfoProducto';
 export * from './Filters';
 export * from './Forms';
 export { default as ListProducts } from './ListProducts';
