@@ -7,11 +7,8 @@ export const ProveedorDelete = () => {
     const handleDeleteProveedor = async (id: number) => {
         deleteProveedor(id)
             .unwrap()
-            .then(() => {
-                toast.success('Proveedor eliminado correctamente');
-            }).catch(() => {
-                toast.error('Error al eliminar el proveedor');
-            });
+            .then(() => toast.success('Proveedor eliminado correctamente'))
+            .catch(() => toast.error('Error al eliminar el proveedor'));
     }
 
     return { handleDeleteProveedor };

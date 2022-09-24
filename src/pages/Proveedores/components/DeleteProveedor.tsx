@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { Notifications } from "../../../components/ui";
-import { ProveedorDelete } from "../helpers"
+import { ProveedorDelete } from "../helpers";
 
 interface DeleteProveedorProps {
     id: number;

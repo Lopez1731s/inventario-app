@@ -7,3 +7,6 @@ export interface ICategorias {
 export interface ICategoriasCreate {
     nombre: string;
 }
+export interface ICategoriasUpdate extends ICategoriasCreate {
+    id: number;
+}

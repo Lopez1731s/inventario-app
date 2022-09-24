@@ -5,7 +5,7 @@ import { Pagination } from "../../interfaces";
 export const productSlice = apiSlice.injectEndpoints({
     endpoints: (build) => ({
         getProducts: build.query({
-            query: (args: Pagination) => `/products?page=${args.page}&limit=${args.limit}`,
+            query: (args: Pagination) => `/productos?page=${args.page}&limit=${args.limit}`,
             providesTags: ["Products"],
         }),
         createProduct: build.mutation({

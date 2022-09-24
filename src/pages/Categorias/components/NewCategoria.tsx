@@ -1,11 +1,15 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { FC } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Button, Input } from "../../../components/ui";
+
 import { useCreateCategoriaMutation } from "../../../features/categorias/categoriasSlice";
+
+import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 
 import { ICategoriasCreate } from "../../../interfaces";
 import { CategoriaSchema } from "../../../schemas";
+
+import { Button, Input, Notifications } from "../../../components/ui";
 
 interface NewCategoriaProps {
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,19 +21,31 @@ const NewCategoria: FC<NewCategoriaProps> = ({ setShowModal }) => {
         resolver: yupResolver(CategoriaSchema)
     });
 
-    const [createCategoria, { isLoading, isError, isSuccess, error }] = useCreateCategoriaMutation();
+    const [createCategoria] = useCreateCategoriaMutation();
 
     const onSubmit: SubmitHandler<ICategoriasCreate> = (data) => {
-        createCategoria(data);
-        setShowModal(false);
-        reset();
+        createCategoria(data)
+            .unwrap()
+            .then(() => {
+                toast.success("Categoria creada con exito");
+                reset();
+            })
+            .catch((error) => {
+                if (error.status === 409) {
+                    toast.error("Ya existe una categoria con ese nombre");
+                }
+                else {
+                    toast.error("Error al crear la categoria");
+                }
+            })
     }
 
     return (
         <>
+            <Notifications />
             <input type="checkbox" id="new-categoria" className="modal-toggle" />
             <label htmlFor="new-categoria" className="modal cursor-pointer">
-                
+
                 <label className="modal-box relative" htmlFor="">
                     <h3 className="text-lg font-bold">Nueva categoria</h3>
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -42,8 +58,6 @@ const NewCategoria: FC<NewCategoriaProps> = ({ setShowModal }) => {
                                 register={register}
                                 errors={errors}
                             />
-
-                            {isError && <p className="text-error text-sm">Error</p>}
                         </div>
                         <div className="mt-4 flex justify-end">
                             <Button name="Guardar" variant="primary" />
