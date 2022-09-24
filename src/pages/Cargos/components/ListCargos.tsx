@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 
 //API slice
-import { useDeleteCargoMutation, useGetCargosQuery } from '../../../features/cargos/cargosSlice';
+import { useGetCargosQuery } from '../../../features/cargos/cargosSlice';
 
 import { ICargos, RTKresponse } from '../../../interfaces';
 
 //components
 import { ErrorLoading, RoutesLoading } from '../../../components/Loaders';
-import { ActionButton, ModalButton, Notifications, Pagination } from '../../../components/ui';
+import { ActionButton, ModalButton, Notifications } from '../../../components/ui';
 import { LinkButton, LinkButtonActions } from '../../../components/ui/LinkButton';
 import { Filters } from './Filters';
 import NewCargo from './NewCargo';
+import { DeleteCargo } from '../helpers/DeleteCargo';
+import { ModalButtonActions } from '../../../components/ui/ModalButton';
 
 interface ResponseProps extends RTKresponse {
     data: ICargos[];
@@ -21,24 +22,11 @@ const ListCargos = () => {
     const [showModal, setShowModal] = useState(false);
 
     const { data: cargos, isLoading, isError } = useGetCargosQuery<ResponseProps>(undefined);
-    const [deleteCargo] = useDeleteCargoMutation();
+    const { handleDeleteCargo } = DeleteCargo();
 
     if (isLoading) return <RoutesLoading />
 
     if (isError) return <ErrorLoading />
-
-    const handleDelete = (id: number) => {
-        deleteCargo(id)
-            .unwrap()
-            .then(() => {
-                toast.success("Eliminado correctamente");
-            })
-            .catch((error) => {
-                toast.error("Error al eliminar cargo");
-            });
-    }
-
-    console.log(cargos);
 
     return (
         <div className="card w-full bg-base-200 shadow-md rounded-md">
@@ -47,7 +35,7 @@ const ListCargos = () => {
                     <h2 className="card-title">Cargos</h2>
                     <div>
                         <LinkButton name="Exportar" action={LinkButtonActions.Export} link="/" variant="ghost" />
-                        <ModalButton name="Agregar" action={setShowModal} htmlFor={"new-cargo"} />
+                        <ModalButton name="Agregar" action={setShowModal} htmlFor={"new-cargo"} modalAction={ModalButtonActions.Add} />
                     </div>
                 </div>
 
@@ -72,7 +60,7 @@ const ListCargos = () => {
                                                 <td>{cargo.nombre}</td>
                                                 <td>
                                                     <LinkButton action={LinkButtonActions.Edit} link="/" variant="ghost" />
-                                                    <ActionButton handleFunction={() => handleDelete(cargo.id)} id={cargo.id} />
+                                                    <ActionButton handleFunction={() => handleDeleteCargo(cargo.id)} id={cargo.id} />
                                                 </td>
                                             </tr>
                                         )) : (
@@ -85,7 +73,7 @@ const ListCargos = () => {
                             </table>
                         </div>
 
-                        <Pagination />
+                        {/* <Pagination /> */}
                     </div>
                 </div>
 

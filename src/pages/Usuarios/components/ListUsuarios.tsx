@@ -34,7 +34,7 @@ const ListUsuarios = () => {
                     </table>
                 </div>
 
-                <Pagination />
+                {/* <Pagination /> */}
             </div>
         </div>
     )

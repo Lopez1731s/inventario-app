@@ -32,7 +32,7 @@ const ListClientes = () => {
                     </table>
                 </div>
 
-                <Pagination />
+                {/* <Pagination /> */}
             </div>
         </div>
 

@@ -35,7 +35,7 @@ const ListEmpleados = () => {
                     </table>
                 </div>
 
-                <Pagination />
+                {/* <Pagination /> */}
             </div>
         </div>
     )

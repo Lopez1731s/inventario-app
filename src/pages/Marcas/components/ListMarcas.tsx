@@ -32,7 +32,7 @@ const ListMarcas = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <Pagination />
+                        {/* <Pagination /> */}
                     </div>
                     <div className="box">
                         <UpdateMarca />

@@ -2,21 +2,39 @@
 import { useGetCategoriasQuery } from "../../../features/categorias/categoriasSlice";
 
 //interfaces
-import { ICategorias } from "../../../interfaces";
+import { ICategorias, RTKresponse } from "../../../interfaces";
 
 //components
+import { useState } from 'react';
 import { ErrorLoading, RoutesLoading } from "../../../components/Loaders";
 import { LinkButton, LinkButtonActions, ModalButton, Pagination } from "../../../components/ui";
 import { Filters } from "./Filters";
 import NewCategoria from "./NewCategoria";
-import { useState } from 'react';
 import UpdateCategoria from "./UpdateCategoria";
+import { ModalButtonActions } from '../../../components/ui/ModalButton';
+
+type dataResponse = {
+    data: ICategorias[];
+    totalItems: number;
+    currentPage: number;
+    previousPage: null;
+    nextPage: number;
+    totalPages: number;
+}
+interface ResponseProps extends RTKresponse {
+    data: dataResponse;
+}
 
 const ListCategorias = () => {
 
     const [showModal, setShowModal] = useState(false);
+    const [page, setPage] = useState<number>(1);
+    const [limit, setLimit] = useState<number>(5);
 
-    const { data: categorias, isLoading, isError, error } = useGetCategoriasQuery(undefined);
+    const { data: categorias, isLoading, isError } = useGetCategoriasQuery<ResponseProps>({
+        page,
+        limit,
+    });
 
     if (isLoading) return <RoutesLoading />
 
@@ -30,7 +48,7 @@ const ListCategorias = () => {
                     <h2 className="card-title">Categorias</h2>
                     <div>
                         <LinkButton name="Exportar" action={LinkButtonActions.Export} link="/" variant="ghost" />
-                        <ModalButton name="Agregar" action={setShowModal} htmlFor={"new-categoria"} />
+                        <ModalButton name="Agregar" action={setShowModal} htmlFor={"new-categoria"} modalAction={ModalButtonActions.Add} />
                     </div>
                 </div>
 
@@ -64,7 +82,13 @@ const ListCategorias = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <Pagination />
+
+                        <Pagination
+                            setPage={setPage}
+                            setLimit={setLimit}
+                            pagination={categorias}
+                        />
+
                     </div>
                     <div className="box">
                         <UpdateCategoria />

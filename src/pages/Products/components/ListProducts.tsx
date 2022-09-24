@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { useGetProductsQuery } from "../../../features/products/productSlice";
 
 import { IProducts, RTKresponse } from "../../../interfaces";
@@ -8,13 +10,24 @@ import { Filters } from "./Filters";
 
 type dataResponse = {
     data: IProducts[];
+    totalItems: number;
+    currentPage: number;
+    previousPage: null;
+    nextPage: number;
+    totalPages: number;
 }
 interface ResponseProps extends RTKresponse {
     data: dataResponse;
 }
 
 const ListProducts = () => {
-    const { data: productos, isLoading, isError } = useGetProductsQuery<ResponseProps>(undefined);
+    const [page, setPage] = useState<number>(1);
+    const [limit, setLimit] = useState<number>(5);
+
+    const { data: productos, isLoading, isError } = useGetProductsQuery<ResponseProps>({
+        page,
+        limit,
+    });
 
     if (isLoading) return <RoutesLoading />
 
@@ -84,7 +97,11 @@ const ListProducts = () => {
                     </table>
                 </div>
 
-                <Pagination />
+                <Pagination
+                    setPage={setPage}
+                    setLimit={setLimit}
+                    pagination={productos}
+                />
             </div>
         </div>
     )

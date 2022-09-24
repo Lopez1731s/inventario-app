@@ -1,14 +1,39 @@
+import { useState } from 'react';
+
 import { useGetProveedoresQuery } from "../../../features/proveedores/proveedoresSlice";
 
 import { IProveedor } from '../../../interfaces/Proveedor';
 
 import { ErrorLoading, RoutesLoading } from "../../../components/Loaders";
-import { LinkButton, LinkButtonActions, Pagination } from "../../../components/ui";
+import { LinkButton, LinkButtonActions, ModalDelete, Notifications, Pagination } from "../../../components/ui";
+import { RTKresponse } from '../../../interfaces';
 import { Filters } from "./Filters";
+import DeleteProveedor from './DeleteProveedor';
+
+type dataResponse = {
+    data: IProveedor[];
+    totalItems: number;
+    currentPage: number;
+    previousPage: null;
+    nextPage: number;
+    totalPages: number;
+}
+interface ResponseProps extends RTKresponse {
+    data: dataResponse;
+}
 
 const ListProveedores = () => {
 
-    const { data: proveedores, isLoading, isError } = useGetProveedoresQuery(undefined);
+    const [page, setPage] = useState<number>(1);
+    const [limit, setLimit] = useState<number>(5);
+
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [itemToDelete, setItemToDelete] = useState<number>(0);
+
+    const { data: proveedores, isLoading, isError } = useGetProveedoresQuery<ResponseProps>({
+        page,
+        limit,
+    });
 
     if (isLoading) return <RoutesLoading />
 
@@ -50,12 +75,12 @@ const ListProveedores = () => {
                                         <td>{proveedor.primerNombre} {proveedor.segundoNombre}</td>
                                         <td>{proveedor.primerApellido} {proveedor.segundoApellido}</td>
                                         <td>{proveedor.empresa}</td>
-                                        <td>{proveedor.telefono}</td>
+                                        <td>{proveedor.telefono ? proveedor.telefono : '-'}</td>
                                         <td>{proveedor.correo}</td>
                                         <td>
                                             <div className="flex gap-2">
-                                                <LinkButton action={LinkButtonActions.Edit} link={`editar/`} variant="ghost" />
-                                                <LinkButton action={LinkButtonActions.Details} link={`detalle/`} variant="ghost" />
+                                                <LinkButton action={LinkButtonActions.Edit} link={`editar/${proveedor.id}`} variant="ghost" />
+                                                <ModalDelete htmlFor="delete-proveedor" setShowModal={setShowModal} itemToDelete={proveedor.id} setItemToDelete={setItemToDelete} />
                                             </div>
                                         </td>
                                     </tr>
@@ -65,7 +90,15 @@ const ListProveedores = () => {
                     </table>
                 </div>
 
-                <Pagination />
+                {showModal && (<DeleteProveedor id={itemToDelete} setShowModal={setShowModal} />)}
+                
+                <Notifications />
+
+                <Pagination
+                    setPage={setPage}
+                    setLimit={setLimit}
+                    pagination={proveedores}
+                />
             </div>
         </div>
     )

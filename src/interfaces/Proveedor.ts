@@ -18,3 +18,7 @@ export interface IProveedorCreate {
     telefono: string;
     correo: string;
 }
+
+export interface IProveedorUpdate extends IProveedorCreate { 
+    id: string;
+}

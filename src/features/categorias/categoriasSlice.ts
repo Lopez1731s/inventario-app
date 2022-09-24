@@ -1,10 +1,10 @@
-import { ICategoriasCreate } from "../../interfaces";
+import { ICategoriasCreate, Pagination } from "../../interfaces";
 import { apiSlice } from "../api/apiSlice";
 
 export const categoriasSlice = apiSlice.injectEndpoints({
     endpoints: (build) => ({
         getCategorias: build.query({
-            query: () => "/categorias",
+            query: (args: Pagination) => `/categorias?page=${args.page}&limit=${args.limit}`,
             providesTags: ["Categorias"],
         }),
         getCategoria: build.query({
