@@ -1,14 +1,15 @@
-import { FC, useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { useGetCategoriaQuery, useUpdateCategoriaMutation } from "../../../features/categorias/categoriasSlice";
 
 import { ICategoriasUpdate } from "../../../interfaces";
 import { CategoriaSchema } from "../../../schemas";
-import { Button, Input, Notifications } from "../../../components/ui";
-import { ErrorLoading, RoutesLoading } from "../../../components/Loaders";
+
 import { toast } from 'react-toastify';
+import { ErrorLoading, RoutesLoading } from "../../../components/Loaders";
+import { Button, Input } from "../../../components/ui";
 
 interface UpdateCategoriaProps {
     itemToUpdate: number;
@@ -32,8 +33,8 @@ const UpdateCategoria: FC<UpdateCategoriaProps> = ({ itemToUpdate, setUpdateModa
 
         updateCategoria(categoriaData)
             .unwrap()
-            .then((res) => { toast.success('Categoria actualizada correctamente'); setUpdateModal(false) })
-            .catch((err) => toast.error('Error al actualizar la categoria'));
+            .then(() => { toast.success('Categoria actualizada correctamente'); setUpdateModal(false) })
+            .catch((error) => error.status === 409 ? toast.error("Ya existe una categoria con ese nombre") : toast.error("Error al actualizar la categoria"));
     }
 
     useEffect(() => {

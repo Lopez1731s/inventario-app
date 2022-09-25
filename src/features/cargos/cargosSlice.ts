@@ -1,5 +1,6 @@
 import { ICargosCreate } from "../../interfaces";
 import { apiSlice } from "../api/apiSlice";
+import { ICargosUpdate } from '../../interfaces/Cargos';
 
 export const cargosSlice = apiSlice.injectEndpoints({
     endpoints: (build) => ({
@@ -19,6 +20,18 @@ export const cargosSlice = apiSlice.injectEndpoints({
             invalidatesTags: ["Cargos"],
             extraOptions: { maxRetries: 1 },
         }),
+        updateCargo: build.mutation({
+            query(data: ICargosUpdate) {
+                const { id, ...body } = data;
+                return {
+                    url: `/cargos/${data.id}`,
+                    method: "PATCH",
+                    body
+                };
+            },
+            invalidatesTags: ["Cargos"],
+            extraOptions: { maxRetries: 1 },
+        }),
         deleteCargo: build.mutation({
             query: (id: number) => ({
                 url: `/cargos/${id}`,
@@ -34,5 +47,6 @@ export const {
     useGetCargosQuery,
     useGetCargoQuery,
     useCreateCargoMutation,
+    useUpdateCargoMutation,
     useDeleteCargoMutation,
 } = cargosSlice;

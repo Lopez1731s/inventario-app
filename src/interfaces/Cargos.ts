@@ -1,8 +1,12 @@
-export interface ICargos{
+export interface ICargos {
     id: number;
     nombre: string;
 }
 
-export interface ICargosCreate{
+export interface ICargosCreate {
     nombre: string;
+}
+
+export interface ICargosUpdate extends ICargosCreate { 
+    id: number;
 }

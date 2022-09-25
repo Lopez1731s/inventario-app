@@ -1,1 +1,1 @@
-export * from './DeleteCargo';
+export * from './CargoDelete';

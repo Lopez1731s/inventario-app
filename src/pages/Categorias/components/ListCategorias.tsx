@@ -27,12 +27,11 @@ interface ResponseProps extends RTKresponse {
 }
 
 const ListCategorias = () => {
-
-
-    const [item, setItem] = useState<number>(0);
-    const [showModal, setShowModal] = useState<boolean>(false);
-    const [updateModal, setUpdateModal] = useState<boolean>(false);
     const [itemToDelete, setItemToDelete] = useState<number>(0);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    
+    const [item, setItem] = useState<number>(0);
+    const [updateModal, setUpdateModal] = useState<boolean>(false);
 
     const [page, setPage] = useState<number>(1);
     const [limit, setLimit] = useState<number>(5);
@@ -100,28 +99,11 @@ const ListCategorias = () => {
                             </table>
                         </div>
 
-                        <Pagination
-                            setPage={setPage}
-                            setLimit={setLimit}
-                            pagination={categorias}
-                        />
+                        <Pagination setPage={setPage} setLimit={setLimit} pagination={categorias} />
 
                     </div>
                     <div className="box">
-                        {
-                            updateModal ?
-                                (
-                                    <UpdateCategoria
-                                        itemToUpdate={item}
-                                        setUpdateModal={setUpdateModal}
-                                    />
-                                ) :
-                                (
-                                    <NotSelectedOption
-                                        title="Selecciona una categoria para editar."
-                                    />
-                                )
-                        }
+                        {updateModal ? (<UpdateCategoria itemToUpdate={item} setUpdateModal={setUpdateModal} />) : (<NotSelectedOption title="Selecciona una categoria para editar." />)}
                     </div>
                 </div>
 
