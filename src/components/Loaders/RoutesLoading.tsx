@@ -1,8 +1,12 @@
 import './styles/index.css';
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/theme';
 
 const RoutesLoading = () => {
+    const { getTheme } = useContext(ThemeContext);
+
     return (
-        <div className="flex justify-center mt-36">
+        <div className="flex justify-center mt-36" data-theme={getTheme}>
             <div className="justify-items-center">
                 <div className="spinner"></div>
 

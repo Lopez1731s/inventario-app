@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useState, useContext } from 'react';
 import { NavLink, Outlet } from "react-router-dom";
+import { ThemeContext } from '../../context/theme';
 import { Navbar } from "../Navbar/Navbar";
 import { SidebarData } from "./SidebarData";
 
 
 const Sidebar = () => {
     const [open, setOpen] = useState<boolean>(true);
-    const [theme, setTheme] = useState<string>("light");
+
+    const { getTheme } = useContext(ThemeContext);
 
     return (
-        // light night
-        <div className="flex min-h-screen" data-theme={theme}>
-            <Navbar theme={theme} setTheme={setTheme} />
+        <div className="flex min-h-screen" data-theme={getTheme}>
+            <Navbar />
             <div className={`bg-base-200 z-20 p-5 pt-8 ${open ? "w-72" : "w-20"} duration-500 relative border-r border-accent shadow-sm`}>
+
                 <button
                     className={`bg-secondary text-primary text-3xl rounded-full absolute -right-3 top-12 border ${!open && "rotate-180"}`}
                     onClick={() => setOpen(!open)}
@@ -76,7 +78,6 @@ const Sidebar = () => {
                     }
                 </ul>
             </div>
-
 
             <div className={`${open ? "mx-28" : "mx-28"} pt-28 w-full duration-500 h-full`}>
                 <Outlet />
