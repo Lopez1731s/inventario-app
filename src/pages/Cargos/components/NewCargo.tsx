@@ -58,9 +58,6 @@ const NewCargo: FC<IFormInputs> = ({ setShowModal }) => {
                     </form>
                 </label>
             </label>
-
-            <Notifications />
-
         </>
     )
 }

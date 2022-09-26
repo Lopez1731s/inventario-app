@@ -1,5 +1,10 @@
 export interface IMarca {
     id: number;
     nombre: string;
-    imagen: string | null;
+    imagen: string;
+}
+
+export interface IMarcaCreate { 
+    nombre: string;
+    imagen: string;
 }

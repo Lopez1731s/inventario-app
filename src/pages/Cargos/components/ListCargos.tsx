@@ -87,8 +87,6 @@ const ListCargos = () => {
                                 </tbody>
                             </table>
                         </div>
-
-                        {/* <Pagination /> */}
                     </div>
 
                     <div>
