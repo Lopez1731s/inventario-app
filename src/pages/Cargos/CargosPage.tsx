@@ -1,12 +1,17 @@
+import { lazy, Suspense } from 'react';
 import { Route } from "react-router-dom"
 import { RoutesNotFound } from "../../utilities"
-import { ListCargos, NewCargo, UpdateCargo } from "./components"
+import { RoutesLoading } from "../../components/Loaders";
+
+const ListCargos = lazy(() => import('./components/ListCargos'));
 
 const CargosPage = () => {
     return (
-        <RoutesNotFound>
-            <Route path="/" element={<ListCargos />} />
-        </RoutesNotFound>
+        <Suspense fallback={<RoutesLoading />}>
+            <RoutesNotFound>
+                <Route path="/" element={<ListCargos />} />
+            </RoutesNotFound>
+        </Suspense>
     )
 }
 export default CargosPage

@@ -59,6 +59,7 @@ const ProductoProvider: FC<Props> = ({ children }) => {
     return (
         <ProductoContext.Provider value={{
             handleAddProducto,
+            producto,
             imageArray,
             handleAddImage,
             handleDeleteImage,

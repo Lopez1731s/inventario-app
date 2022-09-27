@@ -1,7 +1,15 @@
+import { useState } from "react";
 import { LinkButton, LinkButtonActions, Pagination } from "../../../components/ui"
+import { useGetEmpleadosQuery } from "../../../features/empleados/empleadosSlice"
 import { Filters } from "./Filters"
 
 const ListEmpleados = () => {
+
+    const [page, setPage] = useState<number>(1);
+    const [limit, setLimit] = useState<number>(5);
+
+    const { data: Empleados, isLoading, isError, isSuccess } = useGetEmpleadosQuery({ page, limit });
+
     return (
         <div className="card w-full bg-base-200 shadow-md rounded-md">
             <div className="card-body">
@@ -30,7 +38,11 @@ const ListEmpleados = () => {
                         </thead>
 
                         <tbody>
+                            <tr>
+                                {
 
+                                }
+                            </tr>
                         </tbody>
                     </table>
                 </div>

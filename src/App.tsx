@@ -17,9 +17,9 @@ const Login = lazy(() => import("./pages/LoginPage/LoginPage"));
 
 const App = () => {
     return (
-        <Suspense fallback={<RoutesLoading />}>
-            <Provider store={store}>
-                <ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider>
+                <Suspense fallback={<RoutesLoading />}>
                     <BrowserRouter>
                         <RoutesNotFound>
                             <Route path="/" element={<Navigate to={`${PrivateRoutes.PRIVATE}/dashboard`} />} />
@@ -31,9 +31,9 @@ const App = () => {
                             <Route path={PublicRoutes.LOGIN} element={<Login />} />
                         </RoutesNotFound>
                     </BrowserRouter>
-                </ThemeProvider>
-            </Provider>
-        </Suspense>
+                </Suspense>
+            </ThemeProvider>
+        </Provider>
     )
 }
 export default App

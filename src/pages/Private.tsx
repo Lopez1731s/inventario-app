@@ -14,6 +14,7 @@ const ProductsPage = lazy(() => import("./Products/ProductsPage"));
 const CategoriasPage = lazy(() => import("./Categorias/CategoriasPage"));
 const MarcasPage = lazy(() => import("./Marcas/MarcasPage"));
 const PedidosPage = lazy(() => import("./Pedidos/PedidosPage"));
+const OrdenesPage = lazy(() => import("./Ordenes/OrdenesPage"));
 
 const Private = () => {
     return (
@@ -29,6 +30,7 @@ const Private = () => {
                 <Route path={`${PrivateRoutes.CATEGORIAS}/*`} element={<CategoriasPage />} />
                 <Route path={`${PrivateRoutes.MARCAS}/*`} element={<MarcasPage />} />
                 <Route path={`${PrivateRoutes.PEDIDOS}/*`} element={<PedidosPage />} />
+                <Route path={`${PrivateRoutes.ORDENES}/*`} element={<OrdenesPage />} />
             </Route>
         </RoutesNotFound>
     )

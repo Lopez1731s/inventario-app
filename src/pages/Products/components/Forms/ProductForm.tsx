@@ -36,11 +36,9 @@ interface Marca extends RTKresponse {
 }
 
 const ProductForm: FC<IProductForm> = ({ register, errors }) => {
-    console.log(errors);
-
-    const { data: Proveedores } = useGetProveedoresQuery<Proveedor>(undefined);
-    const { data: Categorias } = useGetCategoriasQuery<Categoria>(undefined);
-    const { data: Marcas } = useGetMarcasQuery<Marca>(undefined);
+    const { data: Proveedores } = useGetProveedoresQuery<Proveedor>({ page: 1, limit: 1000 });
+    const { data: Categorias } = useGetCategoriasQuery<Categoria>({ page: 1, limit: 1000 });
+    const { data: Marcas } = useGetMarcasQuery<Marca>({ page: 1, limit: 1000 });
 
     return (
         <div className="card w-full bg-base-200 shadow-md rounded-md">

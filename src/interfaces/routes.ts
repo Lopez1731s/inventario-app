@@ -14,4 +14,5 @@ export const PrivateRoutes = {
     CATEGORIAS: 'categorias',
     MARCAS: 'marcas',
     PEDIDOS: 'pedidos',
+    ORDENES: 'ordenes',
 }

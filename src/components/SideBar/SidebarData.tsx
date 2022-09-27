@@ -1,4 +1,4 @@
-import { categoriesIcon, clients, employeeIcon, homeIcon, marks, orders, productIcon, proveedores, roles, users } from "./SideBarIcons";
+import { Categorias, Clientes, Empleados, Inicio, Marcas, Pedidos, Productos, Proveedores, Cargos, Usuarios, Ordenes } from "./SideBarIcons";
 
 export const SidebarData = [
     {
@@ -6,7 +6,7 @@ export const SidebarData = [
             {
                 name: 'Inicio',
                 url: "dashboard",
-                icon: homeIcon,
+                icon: Inicio,
             }
         ]
     },
@@ -16,27 +16,27 @@ export const SidebarData = [
             {
                 name: "Empleados",
                 url: "empleados",
-                icon: employeeIcon,
+                icon: Empleados,
             },
             {
                 name: "Cargos",
                 url: "cargos",
-                icon: roles,
+                icon: Cargos,
             },
             {
                 name: "Usuarios",
                 url: "usuarios",
-                icon: users,
+                icon: Usuarios,
             },
             {
                 name: "Clientes",
                 url: "clientes",
-                icon: clients,
+                icon: Clientes,
             },
             {
                 name: "Proveedores",
                 url: "proveedores",
-                icon: proveedores,
+                icon: Proveedores,
             }
         ],
     },
@@ -46,22 +46,27 @@ export const SidebarData = [
             {
                 name: "Productos",
                 url: "productos",
-                icon: productIcon,
+                icon: Productos,
             },
             {
                 name: "Categorías",
                 url: "categorias",
-                icon: categoriesIcon,
+                icon: Categorias,
             },
             {
                 name: "Marcas",
                 url: "marcas",
-                icon: marks,
+                icon: Marcas,
             },
             {
                 name: "Pedidos",
                 url: "pedidos",
-                icon: orders,
+                icon: Pedidos,
+            },
+            {
+                name: "Ordenes",
+                url: "ordenes",
+                icon: Ordenes,
             }
         ]
     },

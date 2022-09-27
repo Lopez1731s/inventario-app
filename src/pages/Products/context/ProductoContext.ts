@@ -5,6 +5,7 @@ import { IProductoCreate } from '../../../interfaces/Products';
 
 export interface Image {
     handleAddProducto: (producto: IProductoCreate) => void;
+    producto: IProductoCreate;
     saveProducto: () => void;
 
     imageArray: ImageArray[];

@@ -1,4 +1,4 @@
-import { LinkButton, LinkButtonActions, Pagination } from "../../../components/ui"
+import { LinkButton, LinkButtonActions } from "../../../components/ui"
 import { Filters } from "./Filters"
 
 const ListPedido = () => {
@@ -30,8 +30,6 @@ const ListPedido = () => {
                         </tbody>
                     </table>
                 </div>
-
-                <Pagination />
             </div>
         </div>
     )

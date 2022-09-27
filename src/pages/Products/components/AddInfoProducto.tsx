@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ProductoContext } from "../context";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,17 +11,42 @@ import { ProductSchema } from "../../../schemas";
 import { ProductForm } from "./Forms";
 
 const AddInfoProducto = () => {
-    const { handleAddProducto } = useContext(ProductoContext);
+    const { handleAddProducto, producto } = useContext(ProductoContext);
     const navigate = useNavigate();
 
-    const { register, handleSubmit, formState: { errors } } = useForm<IProductoCreate>({
-        resolver: yupResolver(ProductSchema)
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm<IProductoCreate>({
+        resolver: yupResolver(ProductSchema),
+        defaultValues: {
+            nombre: producto?.nombre,
+            sku: producto?.sku,
+            descripcion: producto?.descripcion,
+            precioTienda: producto?.precioTienda,
+            precioVenta: producto?.precioVenta,
+            slug: producto?.slug,
+            proveedor: producto?.proveedor,
+            categoria: producto?.categoria,
+            marca: producto?.marca,
+        }
     })
 
     const onSubmit: SubmitHandler<IProductoCreate> = (data) => {
         handleAddProducto(data);
         navigate("/app/productos/crear/step2");
     }
+
+    useEffect(() => {
+        if (producto) {
+            setValue("nombre", producto.nombre);
+            setValue("sku", producto.sku);
+            setValue("descripcion", producto.descripcion);
+            setValue("precioTienda", producto.precioTienda);
+            setValue("precioVenta", producto.precioVenta);
+            setValue("slug", producto.slug);
+            setValue("proveedor", producto.proveedor);
+            setValue("categoria", producto.categoria);
+            setValue("marca", producto.marca);
+        }
+    }, [producto])
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
