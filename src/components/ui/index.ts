@@ -1,5 +1,6 @@
 export * from './ActionButton';
 export * from './Button';
+export * from './DatePicker';
 export * from './Input';
 export * from './LinkButton';
 export * from './ModalButton';
