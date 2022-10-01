@@ -1,6 +1,5 @@
-import { IProveedorCreate, Pagination } from "../../interfaces";
+import { IProveedorCreate, IProveedorUpdate, Pagination } from "../../interfaces";
 import { apiSlice } from "../api/apiSlice";
-import { IProveedorUpdate } from '../../interfaces/Proveedor';
 
 export const proveedoresSlice = apiSlice.injectEndpoints({
     endpoints: (build) => ({
@@ -22,7 +21,7 @@ export const proveedoresSlice = apiSlice.injectEndpoints({
             extraOptions: { maxRetries: 1 },
         }),
         updateProveedor: build.mutation({
-            query(data : IProveedorUpdate) {
+            query(data: IProveedorUpdate) {
                 const { id, ...body } = data;
                 return {
                     url: `/proveedores/${data.id}`,

@@ -9,3 +9,13 @@ export const ProveedorSchema = yup.object().shape({
     telefono: yup.string().trim().required("El telefono del proveedor es requerido").min(8, "El telefono del proveedor debe tener al menos 8 caracteres").max(8, "El telefono del proveedor debe tener como maximo 8 caracteres"),
     correo: yup.string().trim().email("El formato del correo del proveedor es invalido").required("El correo del proveedor es requerido").min(3, "El correo del proveedor debe tener al menos 3 caracteres").max(100, "El correo del proveedor debe tener como maximo 100 caracteres"),
 });
+
+export const ProveedorSchemaFilters = yup.object().shape({
+    primerNombre: yup.string().trim(),
+    segundoNombre: yup.string().trim(),
+    primerApellido: yup.string().trim(),
+    segundoApellido: yup.string().trim(),
+    empresa: yup.string().trim(),
+    telefono: yup.string().trim(),
+    correo: yup.string().trim(),
+});

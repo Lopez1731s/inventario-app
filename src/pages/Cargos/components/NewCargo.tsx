@@ -8,29 +8,21 @@ import { Button, Input, Notifications } from "../../../components/ui"
 import { useCreateCargoMutation } from "../../../features/cargos/cargosSlice";
 import { FC } from "react";
 import { toast } from 'react-toastify';
+import { CargoCreate } from "../helpers";
 
 interface IFormInputs {
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const NewCargo: FC<IFormInputs> = ({ setShowModal }) => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<ICargosCreate>({
+    const { register, handleSubmit, formState: { errors } } = useForm<ICargosCreate>({
         resolver: yupResolver(CategoriaSchema)
     });
 
-    const [createCargo] = useCreateCargoMutation();
+    const { handleCreateCargo } = CargoCreate({ setShowModal })
 
-    const onSubmit: SubmitHandler<ICargosCreate> = async (data) => {
-        await createCargo(data)
-            .unwrap()
-            .then(() => {
-                toast.success("Cargo creado correctamente");
-                reset();
-            })
-            .catch((error) => {
-                toast.error("Error al crear cargo");
-            });
-    }
+
+    const onSubmit: SubmitHandler<ICargosCreate> = (data) => handleCreateCargo(data);
 
     return (
         <>

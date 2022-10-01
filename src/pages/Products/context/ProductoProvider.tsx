@@ -44,8 +44,8 @@ const ProductoProvider: FC<Props> = ({ children }) => {
     const saveProducto = () => {
         const data = {
             ...producto,
-            images: imageArray,
-            properties: productProperties
+            // images: imageArray,
+            // properties: productProperties
         }
 
         createProduct(data)

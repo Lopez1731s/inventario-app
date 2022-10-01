@@ -30,10 +30,7 @@ const ListProveedores = () => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [itemToDelete, setItemToDelete] = useState<number>(0);
 
-    const { data: proveedores, isLoading, isError } = useGetProveedoresQuery<ResponseProps>({
-        page,
-        limit,
-    });
+    const { data: proveedores, isLoading, isError } = useGetProveedoresQuery<ResponseProps>({ page, limit });
 
     if (isLoading) return <RoutesLoading />
 
@@ -91,7 +88,7 @@ const ListProveedores = () => {
                 </div>
 
                 {showModal && (<DeleteProveedor id={itemToDelete} setShowModal={setShowModal} />)}
-                
+
                 <Notifications />
 
                 <Pagination

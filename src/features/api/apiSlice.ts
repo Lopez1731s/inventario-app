@@ -13,6 +13,6 @@ export const apiSlice = createApi({
         { maxRetries: 3 }
     ),
     refetchOnReconnect: true,
-    tagTypes: ["Categorias", "Cargos", "Proveedores", "Products", "Marcas", "Empleados", "Clientes", "Pedidos"],
+    tagTypes: ["Categorias", "Cargos", "Proveedores", "Products", "Marcas", "Empleados", "Clientes", "Pedidos", "Ordenes", "Usuarios", "Roles"],
     endpoints: builder => ({})
 })
