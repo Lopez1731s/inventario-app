@@ -18,6 +18,7 @@ export interface IProductoCreate {
     slug: string;//
     marca: string;//
     categoria: string;//
+    cantidad: number;//
     proveedor: number;//
     propiedades: PropiedadesProducto;
     imagenes: string[];

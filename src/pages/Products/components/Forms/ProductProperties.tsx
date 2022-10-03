@@ -1,15 +1,22 @@
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button, Input, LinkButton, LinkButtonActions } from '../../../../components/ui';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { ProductoContext } from '../../context';
+
 import { PropiedadesProducto } from '../../../../interfaces';
 import { ProductPropertiesSchema } from '../../../../schemas';
-import { useContext } from 'react';
-import { ProductoContext } from '../../context';
+
+import { Button, Input, Notifications } from '../../../../components/ui';
+
 import DeletePropertyButtom from '../ui/DeletePropertyButtom';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const ProductProperties = () => {
+
+    const navigate = useNavigate();
 
     const { productProperties, handleAddProductProperties, saveProducto } = useContext(ProductoContext);
 
@@ -18,20 +25,18 @@ const ProductProperties = () => {
     });
 
     const onSubmit: SubmitHandler<PropiedadesProducto> = (data) => { handleAddProductProperties(data); reset() };
-
-    const sentData = () => {
-        saveProducto();
-    }
+    const nextStep = () => productProperties.length > 0 ? navigate("/app/productos/crear/review") : toast.error("Debes agregar al menos una propiedad");
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="card w-full bg-base-200 shadow-md rounded-md mt-9 mb-9">
-                <div className="card-body">
-                    <h1 className="text-2xl font-semibold">Propiedades</h1>
-                    <span className="text-primary-base ">Agrega las propiedades del producto</span>
+        <div className="w-full h-full rounded-md shadow-md card bg-base-200">
+            <Notifications />
+            <div className="card-body">
+                <h1 className="text-2xl font-semibold">Propiedades</h1>
+                <span className="text-primary-base ">Agrega las propiedades del producto</span>
 
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="flex justify-between">
-                        <div className="mr-3 w-full">
+                        <div className="w-full mr-3">
                             <Input
                                 name="nombre_propiedad"
                                 variant="primary"
@@ -42,7 +47,7 @@ const ProductProperties = () => {
                             />
 
                         </div>
-                        <div className="mr-3 w-full">
+                        <div className="w-full mr-3">
                             <Input
                                 name="valor_propiedad"
                                 variant="primary"
@@ -56,7 +61,7 @@ const ProductProperties = () => {
                         <Button variant="primary" name="Agregar" />
                     </div>
 
-                    <div className="overflow-x-auto w-full h-full mt-3">
+                    <div className="w-full h-full mt-3 overflow-x-auto">
                         <table className="table w-full">
                             <thead>
                                 <tr>
@@ -90,13 +95,13 @@ const ProductProperties = () => {
                         </table>
                     </div>
 
-                    <div className="flex justify-between mt-3">
-                        <Link to="/app/productos/crear/step2" className="btn btn-primary">Atras</Link>
-                        <button onClick={sentData} className="btn btn-primary">Guardar</button>
-                    </div>
+                </form>
+                <div className="flex justify-between mt-3">
+                    <Link to="/app/productos/crear/step2" className="btn btn-primary">Atras</Link>
+                    <button className="btn btn-primary" onClick={nextStep}>Siguiente</button>
                 </div>
             </div>
-        </form>
+        </div>
     )
 }
 export default ProductProperties

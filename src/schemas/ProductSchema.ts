@@ -4,6 +4,7 @@ export const ProductSchema = yup.object().shape({
     nombre: yup.string().trim().required("El nombre del producto es requerido").min(3, "El nombre del producto debe tener al menos 3 caracteres"),
     sku: yup.string().trim().required("El SKU del producto es requerido").min(3, "El SKU del producto debe tener al menos 3 caracteres"),
     descripcion: yup.string().trim().required("La descripcion del producto es requerdia").min(3, "La descripcion del producto debe tener al menos 3 caracteres"),
+    cantidad: yup.number().integer().positive("La cantidad debe ser mayor a 0").required("La cantidad del producto es requerida").typeError("La cantidad debe ser un numero"),
     precioTienda: yup.number().typeError("Precio invalido").positive("El precio de la tienda del producto debe ser un numero positivo").required("El precio de la tienda del producto es requerido"),
     precioVenta: yup.number().typeError("Precio invalido").positive("El precio de venta del producto debe ser un numero positivo").required("El precio de venta del producto es requerido"),
     slug: yup.string().trim().required("El slug del producto es requerido").min(3, "El slug del producto debe tener al menos 3 caracteres"),

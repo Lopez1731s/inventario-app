@@ -9,10 +9,10 @@ import { IOrden } from "../../../interfaces";
 
 const MainPage = () => {
 
-    const { data: ordenes, isLoading, isError } = useGetOrdenesQuery({ page: 1, limit: 5 });
+    const { data: Proveedores, isLoading, isError } = useGetProveedoresQuery({ page: 1, limit: 1000000 });
     const { data: Productos } = useGetProductsQuery({ page: 1, limit: 1000000 });
+    const { data: Ordenes } = useGetOrdenesQuery({ page: 1, limit: 5 });
     const { data: Pedidos } = useGetPedidosQuery({ page: 1, limit: 1000000 });
-    const { data: Proveedores } = useGetProveedoresQuery({ page: 1, limit: 1000000 });
 
     if (isLoading) return <RoutesLoading />
 
@@ -85,7 +85,7 @@ const MainPage = () => {
                                 <h2 className="card-title">Ultimas ordenes</h2>
                             </div>
                             {
-                                ordenes.data.length > 0 ? ordenes.data.map((orden: IOrden) => (
+                                Ordenes.data?.length > 0 ? Ordenes.data.map((orden: IOrden) => (
                                     <div className="bg-base-300 rounded-md p-3" key={orden.id}>
                                         <div className="flex justify-between">
                                             <div>

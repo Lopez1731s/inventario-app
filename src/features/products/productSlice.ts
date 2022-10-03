@@ -9,10 +9,18 @@ export const productSlice = apiSlice.injectEndpoints({
             providesTags: ["Products"],
         }),
         createProduct: build.mutation({
-            query: (Product: IProductoCreate) => ({
-                url: "/productos?page=1&limit=1",
+            query: (Product: any) => ({
+                url: "/productos",
                 method: "POST",
                 body: Product,
+            }),
+            invalidatesTags: ["Products"],
+        }),
+        addProductImages: build.mutation({
+            query: (data: any) => ({
+                url: "/productos/images",
+                method: "POST",
+                body: data,
             }),
             invalidatesTags: ["Products"],
         }),
@@ -20,4 +28,4 @@ export const productSlice = apiSlice.injectEndpoints({
     overrideExisting: false,
 });
 
-export const { useGetProductsQuery, useCreateProductMutation } = productSlice;
+export const { useGetProductsQuery, useCreateProductMutation, useAddProductImagesMutation } = productSlice;

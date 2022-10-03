@@ -20,6 +20,7 @@ const AddInfoProducto = () => {
             nombre: producto?.nombre,
             sku: producto?.sku,
             descripcion: producto?.descripcion,
+            cantidad: producto?.cantidad,
             precioTienda: producto?.precioTienda,
             precioVenta: producto?.precioVenta,
             slug: producto?.slug,
@@ -39,6 +40,7 @@ const AddInfoProducto = () => {
             setValue("nombre", producto.nombre);
             setValue("sku", producto.sku);
             setValue("descripcion", producto.descripcion);
+            setValue("cantidad", producto.cantidad);
             setValue("precioTienda", producto.precioTienda);
             setValue("precioVenta", producto.precioVenta);
             setValue("slug", producto.slug);

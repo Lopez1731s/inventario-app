@@ -1,8 +1,9 @@
 import { FC, useState } from "react";
-import { useCreateProductMutation } from "../../../features/products/productSlice";
+import { useAddProductImagesMutation, useCreateProductMutation } from "../../../features/products/productSlice";
 import { IProductoCreate, PropiedadesProducto } from "../../../interfaces";
 import { ImageArray } from "../interfaces";
 import { ProductoContext } from "./ProductoContext";
+import { toast } from 'react-toastify';
 
 interface Props {
     children: JSX.Element | JSX.Element[];
@@ -10,10 +11,15 @@ interface Props {
 
 const ProductoProvider: FC<Props> = ({ children }) => {
     const [createProduct] = useCreateProductMutation();
+    const [createImages] = useAddProductImagesMutation();
 
     const [producto, setProducto] = useState<IProductoCreate>({} as IProductoCreate);
+
+    const [imageName, setImageName] = useState<string[]>([]);
     const [imageArray, setImageArray] = useState<ImageArray[]>([]);
+
     const [productProperties, setProductProperties] = useState<PropiedadesProducto[]>([]);
+    const [propiedades, setPropiedades] = useState({});
 
     const handleAddProducto = (data: IProductoCreate) => {
         setProducto(data);
@@ -24,7 +30,15 @@ const ProductoProvider: FC<Props> = ({ children }) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
 
-        reader.onload = () => setImageArray([...imageArray, { image_name: file.name, image_url: reader.result as string, image_file: file }]);
+        const formData = new FormData();
+        formData.append("file", file);
+
+        createImages(formData).unwrap()
+            .then((res) => setImageName([...imageName, res.fileName]))
+            .catch(() => toast.error("El formato de la imagen no es valido"));
+
+
+        reader.onload = () => setImageArray([...imageArray, { image_name: file.name, image_url: reader.result as string }]);
     }
 
     const handleDeleteImage = (index: number) => {
@@ -34,6 +48,7 @@ const ProductoProvider: FC<Props> = ({ children }) => {
 
     const handleAddProductProperties = (data: PropiedadesProducto) => {
         setProductProperties([...productProperties, data]);
+        setPropiedades({ ...propiedades, [data.nombre_propiedad]: data.valor_propiedad });
     }
 
     const handleDeleteProductProperties = (index: number) => {
@@ -44,14 +59,19 @@ const ProductoProvider: FC<Props> = ({ children }) => {
     const saveProducto = () => {
         const data = {
             ...producto,
-            // images: imageArray,
-            // properties: productProperties
+            imagenes: imageName,
+            propiedades: propiedades,
+            estado: true
         }
 
-        createProduct(data)
-            .unwrap()
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+        toast.promise(
+            createProduct(data)
+                .unwrap(),
+            {
+                pending: "Guardando producto",
+                success: "Producto guardado",
+                error: "Error al guardar el producto"
+            });
     }
 
 

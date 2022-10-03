@@ -12,7 +12,7 @@ const ProductImages = () => {
     const nextStep = () => imageArray.length > 0 ? navigate("/app/productos/crear/step3") : toast.error("Debes agregar al menos una imagen");
 
     return (
-        <div className="card w-full bg-base-200 shadow-md rounded-md mt-9 mb-9">
+        <div className="card w-full bg-base-200 shadow-md rounded-md">
             <Notifications />
             <div className="card-body">
                 <div className="flex justify-between">

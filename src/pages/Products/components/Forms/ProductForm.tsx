@@ -41,7 +41,7 @@ const ProductForm: FC<IProductForm> = ({ register, errors }) => {
     const { data: Marcas } = useGetMarcasQuery<Marca>({ page: 1, limit: 1000 });
 
     return (
-        <div className="card w-full bg-base-200 shadow-md rounded-md">
+        <div className="w-full rounded-md shadow-md card bg-base-200">
             <div className="card-body">
                 <h1 className="text-2xl font-semibold">Información general</h1>
                 <span className="text-primary-base">Agrega la información general del producto</span>
@@ -85,6 +85,15 @@ const ProductForm: FC<IProductForm> = ({ register, errors }) => {
 
                         <div>
                             <Input
+                                name="cantidad"
+                                variant="primary"
+                                type="text"
+                                placeholder="Cantidad"
+                                register={register}
+                                errors={errors}
+                            />
+
+                            <Input
                                 name="precioTienda"
                                 variant="primary"
                                 type="text"
@@ -115,7 +124,7 @@ const ProductForm: FC<IProductForm> = ({ register, errors }) => {
                     </div>
 
                     <div className="grid grid-cols-3 gap-4 mb-3">
-                        <div className="form-control w-full">
+                        <div className="w-full form-control">
                             <select
                                 className={errors.proveedor ? "select select-bordered select-error" : "select select-bordered"}
                                 {...register("proveedor")}
@@ -133,7 +142,7 @@ const ProductForm: FC<IProductForm> = ({ register, errors }) => {
                             </label>
                         </div>
 
-                        <div className="form-control w-full">
+                        <div className="w-full form-control">
                             <select
                                 className={errors.proveedor ? "select select-bordered select-error" : "select select-bordered"}
                                 {...register("categoria")}
@@ -151,7 +160,7 @@ const ProductForm: FC<IProductForm> = ({ register, errors }) => {
                             </label>
                         </div>
 
-                        <div className="form-control w-full">
+                        <div className="w-full form-control">
                             <select
                                 className={errors.proveedor ? "select select-bordered select-error" : "select select-bordered"}
                                 {...register("marca")}
